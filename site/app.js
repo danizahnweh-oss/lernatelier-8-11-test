@@ -3,7 +3,7 @@ const KEY = 'lernatelier-test-v1';
 const $ = s => document.querySelector(s);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const md = value => DOMPurify.sanitize(marked.parse(String(value || '')), {USE_PROFILES:{html:true}});
-const fresh = () => ({version:1,grade:8,subject:'mathematik',variant:'E1',mode:'lernen',lesson:{},exercise:{},answers:{},exams:{},training:{}});
+const fresh = () => ({version:1,grade:8,subject:'mathematik',variant:'E1',mode:'lernen',lesson:{},exercise:{},answers:{},exams:{},training:{},mathFilters:{}});
 let state = fresh(), packs, catalog, recorder, recordingStream, recordingURL;
 let storageError = false;
 try {
@@ -95,11 +95,27 @@ function materials(exam=false, submitted=false, label='A') {
     return `<details ${exam?'open':''}><summary>${esc(h)}</summary><div class="material-body" lang="en">${audio?`<audio controls preload="metadata" src="assets/${id}.wav" aria-label="Hörtext ${esc(id.toUpperCase())}"></audio><p lang="de" class="muted">Künstlich gesprochener Hörtext, britische Stimme. Hör ihn zweimal an.</p>${!exam||submitted?`<details><summary lang="de">Skript als Textalternative öffnen</summary><div class="material-body">${md(transcript)}<p lang="de">Mit geöffnetem Skript prüfst du Lesen, nicht Hörverstehen.</p></div></details>`:''}`:md(s[2])}</div></details>`;
   }).join('')}</section>`;
 }
-function currentExercise() { const i=keyIndex(context(),pack().exercises.length,state.exercise); return pack().exercises[i]; }
+function mathFilter(){state.mathFilters ||= {};return state.mathFilters[context()] ||= {level:'all',topic:'all',competency:'all'};}
+function practiceEntries(){
+  const entries=pack().exercises.map((task,index)=>({task,index}));
+  if(state.subject!=='mathematik')return entries;
+  const f=mathFilter();return entries.filter(({task})=>(f.level==='all'||task.level===f.level)&&(f.topic==='all'||task.topic===f.topic)&&(f.competency==='all'||task.competencies.includes(f.competency)));
+}
+function currentExercise(){const entries=practiceEntries(),index=keyIndex(context(),pack().exercises.length,state.exercise);return (entries.find(e=>e.index===index)||entries[0])?.task;}
+function mathPracticeFilters(count){
+  if(state.subject!=='mathematik')return '';
+  const config=pack().practiceStructure,f=mathFilter();
+  const select=(key,label,values)=>`<div><label for="math-${key}">${label}</label><select id="math-${key}" data-math-filter="${key}"><option value="all">Alle</option>${Object.entries(values).map(([id,name])=>`<option value="${id}" ${f[key]===id?'selected':''}>${esc(name)}</option>`).join('')}</select></div>`;
+  return `<section class="math-filters" aria-labelledby="math-filter-heading"><h3 id="math-filter-heading">Wähle, was du üben möchtest.</h3><p>Grundwissen festigen, Kernaufgaben lösen oder Zusammenhänge vertiefen. Alle Aufgaben bleiben beim Thema lineare Funktionen.</p><div class="math-filter-fields">${select('topic','Teilthema',config.topics)}${select('level','Aufgabengruppe',config.levels)}${select('competency','Was möchtest du trainieren?',config.competencies)}</div><div class="math-filter-status"><span role="status">${count} von ${pack().exercises.length} Aufgaben</span><button class="text-button" data-action="math-filter-reset">Alle Aufgaben anzeigen</button></div></section>`;
+}
+function mathTaskMeta(ex){if(state.subject!=='mathematik')return '';const c=pack().practiceStructure;return `<div class="math-task-meta"><span class="pill">${esc(c.levels[ex.level])}</span><span>${esc(c.topics[ex.topic])}</span><ul aria-label="Geübte Kompetenzen">${ex.competencies.map(id=>`<li>${esc(c.competencies[id])}</li>`).join('')}</ul></div>`;}
+function mathPracticeSource(){return state.subject==='mathematik'?`<p class="reading-note math-source">Aufgabenstruktur inspiriert von <a href="${esc(pack().practiceStructure.source)}" target="_blank" rel="noopener">SMART der Universität Bayreuth ↗</a>. Die Aufgaben hier sind eigene Übungen.</p>`:'';}
 function response(ex) { return state.answers[ex.id] || {text:'',hints:0}; }
 function renderPractice() {
-  const p=pack(),ex=currentExercise(),a=response(ex);
-  $('#panel').innerHTML=sectionTop('Mach den nächsten Schritt.','Eine Aufgabe nach der anderen. Hilfen, wenn du sie brauchst.',`${p.exercises.length} Übungen`)+`<div class="practice-layout"><nav class="exercise-list" aria-label="Übung wählen">${p.exercises.map((e,i)=>`<button data-exercise="${i}" aria-current="${e.id===ex.id}"><span class="exercise-index">${state.answers[e.id]?.self==='klar'||state.answers[e.id]?.correct?'✓':i+1}</span>${esc(e.title)}</button>`).join('')}</nav><article class="exercise-sheet"><div class="exercise-meta"><span>${esc(p.title)}</span><span class="pill">${ex.kind==='number'?'Zahl automatisch prüfbar':'KI-Bewertung verfügbar'}</span></div><h3>${esc(ex.title)}</h3><p class="prompt">${esc(ex.prompt)}</p><form id="practice-form"><label for="answer">${ex.kind==='number'?'Dein Ergebnis':'Deine Antwort oder Notizen'}</label>${ex.kind==='number'?`<input id="answer" type="text" inputmode="decimal" autocomplete="off" value="${esc(a.text)}" required>`:`<textarea id="answer" maxlength="20000" required spellcheck="true" ${state.subject==='englisch'?'lang="en"':''}>${esc(a.text)}</textarea>`}<div class="actions"><button class="button" type="submit">${ex.kind==='number'?'Ergebnis prüfen':'Mit Lösung vergleichen'}</button><button type="button" class="button secondary" data-action="hint" ${(a.hints||0)>=ex.hints.length?'disabled':''}>Hinweis ${Math.min((a.hints||0)+1,ex.hints.length)} anzeigen</button></div><p class="self-check-note">${ex.kind==='number'?'Geprüft wird dein Zahlenwert. Deinen Rechenweg kannst du selbst mit der Lösung vergleichen.':'Lass deine Antwort unten mit KI bewerten oder vergleiche selbst mit dem Lösungsvorschlag.'}</p></form>${ex.hints.slice(0,a.hints||0).map((h,i)=>`<div class="hint"><strong>Hinweis ${i+1}:</strong> ${esc(h)}</div>`).join('')}${ex.kind==='speaking'?recordingUI():''}${a.revealed?feedback(ex,a):''}<div id="ai-exercise"></div></article></div>${materials()}`;
+  const p=pack(),entries=practiceEntries(),ex=currentExercise();
+  if(!ex){$('#panel').innerHTML=sectionTop('Unterricht üben','Lineare Funktionen gezielt trainieren.')+mathPracticeFilters(0)+'<div class="empty-note"><h3>Für diese Kombination gibt es noch keine Aufgabe.</h3><p>Ändere einen Filter oder zeige wieder alle Aufgaben an.</p><button class="button secondary" data-action="math-filter-reset">Filter zurücksetzen</button></div>'+mathPracticeSource();return;}
+  state.exercise[context()]=p.exercises.indexOf(ex);const a=response(ex);
+  $('#panel').innerHTML=sectionTop('Mach den nächsten Schritt.','Eine Aufgabe nach der anderen. Hilfen, wenn du sie brauchst.',`${entries.length} Übungen`)+mathPracticeFilters(entries.length)+`<div class="practice-layout"><nav class="exercise-list" aria-label="Übung wählen">${entries.map(({task:e,index:i})=>`<button data-exercise="${i}" aria-current="${e.id===ex.id}"><span class="exercise-index">${state.answers[e.id]?.self==='klar'||state.answers[e.id]?.correct?'✓':i+1}</span>${esc(e.title)}</button>`).join('')}</nav><article class="exercise-sheet"><div class="exercise-meta"><span>${esc(p.title)}</span><span class="pill">${ex.kind==='number'?'Zahl automatisch prüfbar':'KI-Bewertung verfügbar'}</span></div>${mathTaskMeta(ex)}<h3>${esc(ex.title)}</h3><p class="prompt">${esc(ex.prompt)}</p><form id="practice-form"><label for="answer">${ex.kind==='number'?'Dein Ergebnis':'Deine Antwort oder Notizen'}</label>${ex.kind==='number'?`<input id="answer" type="text" inputmode="decimal" autocomplete="off" value="${esc(a.text)}" required>`:`<textarea id="answer" maxlength="20000" required spellcheck="true" ${state.subject==='englisch'?'lang="en"':''}>${esc(a.text)}</textarea>`}<div class="actions"><button class="button" type="submit">${ex.kind==='number'?'Ergebnis prüfen':'Mit Lösung vergleichen'}</button><button type="button" class="button secondary" data-action="hint" ${(a.hints||0)>=ex.hints.length?'disabled':''}>Hinweis ${Math.min((a.hints||0)+1,ex.hints.length)} anzeigen</button></div><p class="self-check-note">${ex.kind==='number'?'Geprüft wird dein Zahlenwert. Deinen Rechenweg kannst du selbst mit der Lösung vergleichen.':'Lass deine Antwort unten mit KI bewerten oder vergleiche selbst mit dem Lösungsvorschlag.'}</p></form>${ex.hints.slice(0,a.hints||0).map((h,i)=>`<div class="hint"><strong>Hinweis ${i+1}:</strong> ${esc(h)}</div>`).join('')}${ex.kind==='speaking'?recordingUI():''}${a.revealed?feedback(ex,a):''}<div id="ai-exercise"></div></article></div>${materials()}${mathPracticeSource()}`;
   const aiPanel=$('#ai-exercise'),form=$('#practice-form');form.insertBefore(aiPanel,form.querySelector('.actions'));form.querySelector('button[type=submit]').className='button secondary';
   const task={subject:state.subject,grade:8,variant:state.variant,kind:'exercise',taskId:ex.id};
   LernKI.mount($('#ai-exercise'),{task,hintsUsed:(a.hints||0)>0,getAnswer:()=>$('#answer')?.value||state.answers[ex.id]?.text||'',focusAnswer:()=>$('#answer')?.focus(),getStored:()=>state.answers[ex.id]?.ai,onSave:record=>{if(state.answers[ex.id]?.text.trim()===record.answer){state.answers[ex.id].ai=record;save();}}});
@@ -165,7 +181,8 @@ document.addEventListener('click',event=>{
     else {state.lesson[context()]=i+(action==='lesson-next'?1:-1);save();renderLearn();}
   }
   if(action==='hint'){const ex=currentExercise(),a=response(ex);state.answers[ex.id]={...a,hints:Math.min((a.hints||0)+1,ex.hints.length)};save();renderPractice();announce('Hinweis eingeblendet.');}
-  if(action==='next-exercise'){state.exercise[context()]=(keyIndex(context(),pack().exercises.length,state.exercise)+1)%pack().exercises.length;save();renderPractice();}
+  if(action==='next-exercise'){const entries=practiceEntries(),i=entries.findIndex(e=>e.task.id===currentExercise()?.id);state.exercise[context()]=entries[(i+1)%entries.length]?.index||0;save();renderPractice();}
+  if(action==='math-filter-reset'){state.mathFilters[context()]={level:'all',topic:'all',competency:'all'};save();renderPractice();$('#math-topic')?.focus();announce('Alle Matheaufgaben werden angezeigt.');}
   if(action==='back-learn'||action==='pause-exam') setMode('lernen');
   if(action==='print') window.print();
   if(b.id==='record-start')startRecording();if(b.id==='record-stop')stopRecording();
@@ -180,6 +197,7 @@ document.addEventListener('click',event=>{
 });
 document.addEventListener('change',event=>{
   const el=event.target;
+  if(el.dataset.mathFilter){mathFilter()[el.dataset.mathFilter]=el.value;renderPractice();save();document.querySelector(`[data-math-filter="${el.dataset.mathFilter}"]`)?.focus();announce(`${practiceEntries().length} passende Aufgaben.`);}
   if(el.id==='grade'){state.grade=Number(el.value);save();render();focusHeading();}
   if(el.id==='variant'){state.variant=el.value;save();render();focusHeading();}
   if(el.id==='self-check'){const ex=currentExercise();state.answers[ex.id]={...response(ex),self:el.value};save();}

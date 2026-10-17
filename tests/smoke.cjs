@@ -49,6 +49,18 @@ async function ready(){
   assert.equal(await page.locator('.hint').count(),1);
   await axe('mathe-ueben');
  });
+ await check('Mathe: Aufgaben nach Thema, Gruppe und Kompetenz finden',async()=>{
+  await choose('mathematik');await mode('ueben');assert.equal(await page.locator('.exercise-list button').count(),12);
+  await page.locator('#math-level').selectOption('vertiefung');assert.equal(await page.locator('.exercise-list button').count(),5);
+  await page.locator('#math-competency').selectOption('K3');assert.equal(await page.locator('.exercise-list button').count(),2);
+  await page.locator('[data-exercise="8"]').click();assert.match(await page.locator('.prompt').innerText(),/Fahrradverleih/);await page.locator('#answer').fill('A(h)=4+3h, B(h)=10+2h. Bei 6 Stunden kosten beide 22 Euro. Davor ist A, danach B günstiger.');await page.locator('#practice-form button[type=submit]').click();assert.match(await page.locator('.feedback').innerText(),/22/);
+  await page.locator('[data-action=next-exercise]').click();assert.match(await page.locator('.prompt').innerText(),/Wassertank/);assert.match(await page.locator('.math-task-meta').innerText(),/Modellieren/);
+  await page.reload();await page.locator('#math-level').waitFor();assert.equal(await page.locator('#math-level').inputValue(),'vertiefung');assert.match(await page.locator('.prompt').innerText(),/Wassertank/);
+  await page.locator('#math-topic').selectOption('punktprobe');assert.equal(await page.locator('#answer').count(),0);assert.match(await page.locator('.empty-note').innerText(),/keine Aufgabe/);await axe('math-empty');
+  await page.locator('[data-action=math-filter-reset]').first().click();assert.equal(await page.locator('.exercise-list button').count(),12);
+  await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await axe('math-filters-mobile');await page.screenshot({path:path.join(out,'math-practice-mobile.png'),fullPage:true});
+  await page.setViewportSize({width:1440,height:1050});await page.screenshot({path:path.join(out,'math-practice-desktop.png'),fullPage:true});
+ });
  await check('Vollständige Lerntexte für Deutsch und Englisch',async()=>{
   await choose('deutsch');await mode('lernen');assert.match(await page.locator('.lesson-count').innerText(),/von 4/);
   await mode('ueben');await page.locator('#answer').fill('Eigene Behauptung, Begründung und ein Beispiel.');

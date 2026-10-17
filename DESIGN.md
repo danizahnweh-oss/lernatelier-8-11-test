@@ -7,3 +7,5 @@ Design Read: Produktoberfläche, neue eigenständige Gestaltung, ruhige Arbeitsf
 DM Sans lokal, Schriftgrößen 12/14/16/18/24/44 px. Abstände auf 4/8-px-Raster. Flächenradius 12 px, Bedienelemente 8 px. Keine dekorativen Schatten. Akzent #4f46e5, Hover #4338ca, Akzentfläche #e0e7ff, Text #0f172a, Sekundärtext #475569, Grund #f8f9fa und Flächen #ffffff. Bewegung nur als kurzes Feedback, reduzierte Bewegung wird berücksichtigt.
 
 Desktop: Fachnavigation links, zentraler Lerninhalt, ergänzende praktische Darstellung. Mobil: kompakte Jahrgangs- und Fachauswahl oben, darunter dieselben drei Lernbereiche. Keine nur per Hover erreichbaren Aktionen. Sichtbarer Fokus, native Formulare, beschriftete Eingaben und über Pfeiltasten bedienbare Tabs.
+
+Mathematik: oberhalb der Übung stehen drei beschriftete Auswahlfelder für Teilthema, Aufgabengruppe und Kompetenz. Eine Trefferzahl und ein Zurücksetzen-Button halten die Auswahl nachvollziehbar. Die Aufgabe zeigt Gruppe und Kompetenz in Worten; SMART dient der fachlichen Gliederung als Referenz.
