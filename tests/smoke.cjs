@@ -66,6 +66,7 @@ $$f'(x)=3x^2-2$$
   },fixture);
   const sheet=page.locator('#format-fixture');
   assert.equal(await sheet.locator('table').count(),4);
+  assert.equal(await sheet.locator('table').first().evaluate(node=>getComputedStyle(node).display),'table');
   assert.equal(await sheet.locator('table').first().locator('tr').count(),2);
   assert.equal(await sheet.locator('table').last().locator('tr').count(),2);
   assert.doesNotMatch(await sheet.locator('table').last().innerText(),/---/);
