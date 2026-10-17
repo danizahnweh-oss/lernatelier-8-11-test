@@ -1,0 +1,142 @@
+[
+  {
+    "id": "mathematik-8",
+    "subject": "mathematik",
+    "grade": 8,
+    "variant": "gemeinsam",
+    "file": "mathematik-8.md",
+    "source": "LIS_PDF_17-10-2026-9.pdf",
+    "pages": 4,
+    "sha256": "9d9e9ca4120651694a234e9c5a4e6fa3d7d23e07fa017185960fb036a132b42f"
+  },
+  {
+    "id": "mathematik-9",
+    "subject": "mathematik",
+    "grade": 9,
+    "variant": "gemeinsam",
+    "file": "mathematik-9.md",
+    "source": "LIS_PDF_17-10-2026-10.pdf",
+    "pages": 5,
+    "sha256": "1736acd31ad281999b96e87df065dd0d83c1ea0806ea5e3824d15720686f5acc"
+  },
+  {
+    "id": "mathematik-10",
+    "subject": "mathematik",
+    "grade": 10,
+    "variant": "gemeinsam",
+    "file": "mathematik-10.md",
+    "source": "LIS_PDF_17-10-2026-11.pdf",
+    "pages": 3,
+    "sha256": "6d285e5850cbec189083f6d4cc69b4da0782c1dd1d072c7bb007728166e18d5a"
+  },
+  {
+    "id": "mathematik-11",
+    "subject": "mathematik",
+    "grade": 11,
+    "variant": "gemeinsam",
+    "file": "mathematik-11.md",
+    "source": "LIS_PDF_17-10-2026-12.pdf",
+    "pages": 4,
+    "sha256": "5564f4845cf7bea9a4958f35d9f506e4b213588e351ed817bf4f666dc8bf8433"
+  },
+  {
+    "id": "deutsch-8",
+    "subject": "deutsch",
+    "grade": 8,
+    "variant": "gemeinsam",
+    "file": "deutsch-8.md",
+    "source": "LIS_PDF_17-10-2026-8.pdf",
+    "pages": 7,
+    "sha256": "99bf685de66ab83d78d388ec236d2aa22a7af5792ffa81d49be1917518071bf3"
+  },
+  {
+    "id": "deutsch-9",
+    "subject": "deutsch",
+    "grade": 9,
+    "variant": "gemeinsam",
+    "file": "deutsch-9.md",
+    "source": "LIS_PDF_17-10-2026-7.pdf",
+    "pages": 7,
+    "sha256": "63aba5b238c2c24c2e95e96716323d4a5853d6b99ff769843a9896502308d97b"
+  },
+  {
+    "id": "deutsch-10",
+    "subject": "deutsch",
+    "grade": 10,
+    "variant": "gemeinsam",
+    "file": "deutsch-10.md",
+    "source": "LIS_PDF_17-10-2026-6.pdf",
+    "pages": 7,
+    "sha256": "c746caa3fdb038041d31975ff6c889f7b6c78b70cedb2640cf67d29affd88b04"
+  },
+  {
+    "id": "deutsch-11",
+    "subject": "deutsch",
+    "grade": 11,
+    "variant": "gemeinsam",
+    "file": "deutsch-11.md",
+    "source": "LIS_PDF_17-10-2026-5.pdf",
+    "pages": 7,
+    "sha256": "5662fa22d2c9a7709ea0f988394f168793e01e6a2672c1b3cfa80919a71ad37c"
+  },
+  {
+    "id": "englisch-8-e1",
+    "subject": "englisch",
+    "grade": 8,
+    "variant": "E1",
+    "file": "englisch-8-e1.md",
+    "source": "LIS_PDF_17-10-2026.pdf",
+    "pages": 7,
+    "sha256": "404bc2541516206b7c19682b73e0745120071a7817cd58c040370918576454a4"
+  },
+  {
+    "id": "englisch-8-e2",
+    "subject": "englisch",
+    "grade": 8,
+    "variant": "E2",
+    "file": "englisch-8-e2.md",
+    "source": "LIS_PDF_17-10-2026-14.pdf",
+    "pages": 7,
+    "sha256": "aa7f43344dd2ddabcb8b5df77266e8b551463e550409c57ae7260970b6f44695"
+  },
+  {
+    "id": "englisch-9-e1",
+    "subject": "englisch",
+    "grade": 9,
+    "variant": "E1",
+    "file": "englisch-9-e1.md",
+    "source": "LIS_PDF_17-10-2026-2.pdf",
+    "pages": 7,
+    "sha256": "2f61b20b81074ce7282a715c65b479d5b0db412acd171e9a453b82b0b0fe4581"
+  },
+  {
+    "id": "englisch-9-e2",
+    "subject": "englisch",
+    "grade": 9,
+    "variant": "E2",
+    "file": "englisch-9-e2.md",
+    "source": "LIS_PDF_17-10-2026-13.pdf",
+    "pages": 7,
+    "sha256": "630eff8919521e4bcb97b9902c15fbc3ab7a1d5cff2230d1640cd340e60c0ac6"
+  },
+  {
+    "id": "englisch-10",
+    "subject": "englisch",
+    "grade": 10,
+    "variant": "gemeinsam",
+    "file": "englisch-10.md",
+    "source": "LIS_PDF_17-10-2026-3.pdf",
+    "pages": 6,
+    "sha256": "10c11d6408eb1b2f28d4af72a73b23908be044f8aaa5ca36694031e087f3b5a6"
+  },
+  {
+    "id": "englisch-11",
+    "subject": "englisch",
+    "grade": 11,
+    "variant": "gemeinsam",
+    "file": "englisch-11.md",
+    "source": "LIS_PDF_17-10-2026-4.pdf",
+    "pages": 8,
+    "sha256": "cb1907a13e7c59eb0f7177c3bfbdfbf4b18f0eedb8ea089d4679fdfc16f6b3ac"
+  }
+]
