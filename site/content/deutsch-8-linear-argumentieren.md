@@ -42,7 +42,7 @@ Entnimm einem Material nur, was es tatsächlich aussagt. Eine Meinung aus einer 
 
 Überarbeite zuerst den Gedanken: Ist mein Standpunkt klar? Trägt jede Begründung? Passt das Beispiel? Danach prüfst du Übergänge, Wortwahl, Satzbau und Schreibweisen. Eine sprachliche Korrektur ersetzt keine fehlende Begründung.
 
-## Unterricht üben
+## Üben
 
 ### D8-LA-U1 Bestandteile erkennen
 

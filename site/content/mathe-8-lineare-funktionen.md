@@ -44,7 +44,7 @@ Ein fiktiver Fahrradverleih verlangt 4 Euro Grundpreis und 3 Euro je gebuchter S
 
 Verständnisfrage: Ist das Modell proportional? **Antwort: nein, weil der Grundpreis ungleich null ist.**
 
-## Unterricht üben
+## Üben
 
 Bearbeite zunächst selbst. Hinweis 1 lenkt deinen Blick, Hinweis 2 zeigt einen Ansatz. Die Lösungen sind für die spätere Umsetzung getrennt von den Schüleraufgaben auszuliefern.
 

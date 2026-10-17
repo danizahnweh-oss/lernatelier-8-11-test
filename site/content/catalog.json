@@ -20,7 +20,7 @@
     },
     {
       "id": "ueben",
-      "label": "Unterricht üben",
+      "label": "Üben",
       "equal_navigation_priority": true,
       "sequence": [
         "Aufgabe",
