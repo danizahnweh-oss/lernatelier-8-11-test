@@ -9,6 +9,7 @@ Liveadresse: https://danizahnweh-oss.github.io/lernatelier-8-11-test/
 - Mathematik 8: lineare Funktionen mit fünf Lernschritten, interaktivem Graphen und acht Übungen.
 - Deutsch 8: lineares Argumentieren mit vier Lernschritten und sechs Übungen.
 - Englisch 8 E1: London mit fünf Lernschritten, sechs Fertigkeitsübungen, eigenen Lesetexten und zwei künstlich gesprochenen britischen Hörtexten.
+- Bei Erstellungs- oder Prüfungsfehlern werden KI-Aufgaben automatisch bis zu dreimal neu generiert. Einstellungen bleiben erhalten; Eingabefehler und Tageslimits werden ohne Wiederholung angezeigt.
 - Schulaufgabentraining im myAbiFlow-Ablauf: Aufgabe wählen, Aufgabe ansehen, Lösung abgeben, KI-Feedback.
 - KI-generierte Aufgaben mit verbindlicher Themenauswahl, Aufgabenanzahl, Zeit und Punkten; unabhängige zweite Aufgabenprüfung vor der Ausgabe. Eigene Aufgaben können als Text eingegeben oder aus .txt/.md eingelesen werden. Zwei Beispielsätze je Fach bleiben verfügbar.
 - Start- und pausierbarer Timer, Entwurfsspeicherung, Textdatei-Import für Antworten, Wortzählung und Ausdruck. Bilder/PDF sind in dieser Testfassung noch nicht als Upload implementiert.

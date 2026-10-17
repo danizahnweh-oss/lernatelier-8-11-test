@@ -88,13 +88,22 @@ async function ready(){
  }
  await check('KI-Generierung und eigene Aufgabe',async()=>{
   await choose('mathematik');await mode('schulaufgabe');await page.locator('[data-training-step="1"]').click();await page.locator('[data-training-source="generate"]').click();
-  await page.route('**/api/generate',async route=>{const b=route.request().postDataJSON();assert.equal(b.subject,'mathematik');await route.fulfill({status:200,contentType:'application/json',headers:{'Access-Control-Allow-Origin':new URL(base).origin},body:JSON.stringify({id:'generated-test',title:'Generierte lineare Funktionen',assignment:'### Aufgabe 1\nBestimme die Steigung bei y = 2x + 3.',criteria:[{id:'aufgabe1',name:'Aufgabe 1',max:20}],minutes:30,taskToken:'test-token',source:b.source})});});
+  const generationRequests=[];
+  await page.route('**/api/generate',async route=>{const b=route.request().postDataJSON();assert.equal(b.subject,'mathematik');generationRequests.push(b);if(generationRequests.length<=2){await route.fulfill({status:502,contentType:'application/json',headers:{'Access-Control-Allow-Origin':new URL(base).origin},body:JSON.stringify({error:'Die Aufgabenprüfung hat das Paket noch nicht freigegeben.'})});return;}await route.fulfill({status:200,contentType:'application/json',headers:{'Access-Control-Allow-Origin':new URL(base).origin},body:JSON.stringify({id:'generated-test',title:'Generierte lineare Funktionen',assignment:'### Aufgabe 1\nBestimme die Steigung bei y = 2x + 3.',criteria:[{id:'aufgabe1',name:'Aufgabe 1',max:20}],minutes:30,taskToken:'test-token',source:b.source})});});
   await page.locator('#training-count').fill('1');await page.locator('#training-points').fill('20');await page.locator('#training-minutes').fill('30');await page.locator('#training-consent').check();
   await page.locator('#training-setup button[type=submit]').click();await page.getByText('Generierte lineare Funktionen',{exact:true}).waitFor();
+  assert.equal(generationRequests.length,3);assert.equal(new Set(generationRequests.map(r=>r.requestId)).size,3);for(const request of generationRequests){assert.equal(request.count,1);assert.equal(request.minutes,30);assert.equal(request.points,20);}
   await page.locator('.training-paper [data-training-step="3"]').click();await page.locator('[data-training-timer]').click();await page.locator('[data-training-timer]').click();assert.match(await page.locator('[data-training-timer]').innerText(),/starten/);
   await page.locator('#training-answer').fill('m = 2.');await page.locator('#training-submit button[type=submit]').click();assert.ok(await page.locator('#training-ai .ai-request').isVisible());
   await page.locator('[data-training-step="1"]').click();await page.locator('[data-training-source="own"]').click();await page.locator('#training-own').fill('Bestimme die Steigung der Geraden y = 2x + 3.');await page.locator('#training-consent').check();
   await page.locator('#training-setup button[type=submit]').click();await page.getByText('Generierte lineare Funktionen',{exact:true}).waitFor();await page.unroute('**/api/generate');
+ });
+ await check('Generierungsfehler: begrenzte Wiederholung und Tageslimit',async()=>{
+  await page.locator('[data-training-step="1"]').click();await page.locator('[data-training-source="generate"]').click();
+  let requests=0,failStatus=502;
+  await page.route('**/api/generate',async route=>{requests++;await route.fulfill({status:failStatus,contentType:'application/json',headers:{'Access-Control-Allow-Origin':new URL(base).origin},body:JSON.stringify({error:failStatus===429?'Das Tageskontingent ist erreicht.':'Die Aufgabenprüfung ist fehlgeschlagen.'})});});
+  await page.locator('#training-context').fill('Fahrradverleih');await page.locator('#training-consent').check();await page.locator('#training-setup button[type=submit]').click();await page.locator('#training-status .ai-error').waitFor();assert.equal(requests,3);assert.match(await page.locator('#training-status').innerText(),/nach drei Versuchen/);assert.equal(await page.locator('#training-context').inputValue(),'Fahrradverleih');assert.ok(await page.locator('#training-setup button[type=submit]').isEnabled());
+  requests=0;failStatus=429;await page.locator('#training-setup button[type=submit]').click();await page.getByText('Das Tageskontingent ist erreicht.',{exact:true}).waitFor();assert.equal(requests,1);await page.unroute('**/api/generate');
  });
  await check('Jahrgänge und Sprachfolge sind getrennt',async()=>{
   await choose('englisch');

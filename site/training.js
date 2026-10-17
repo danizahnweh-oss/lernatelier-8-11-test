@@ -21,6 +21,14 @@ window.Schultraining=(()=>{
  function tick(){const a=current().attempt;if(!a||!$('#training-time'))return;const remaining=a.deadline?Math.max(0,a.deadline-Date.now()):a.remaining;$('#training-time').textContent=`${String(Math.floor(remaining/60000)).padStart(2,'0')}:${String(Math.floor(remaining%60000/1000)).padStart(2,'0')}`;if(a.deadline&&remaining<=0){a.deadline=null;a.remaining=0;persist();clearInterval(interval);$('#training-time').textContent='Zeit abgelaufen';$('#training-time').setAttribute('aria-label','Die Bearbeitungszeit ist abgelaufen. Deine Antwort bleibt erhalten.');}}
  function wordcount(){const text=$('#training-answer')?.value||'';const el=$('#training-wordcount');if(el)el.textContent=`${text.trim()?text.trim().split(/\s+/).length:0} Wörter. Dein Entwurf wird in diesem Browser gespeichert.`;}
  async function fileText(file,target,max){if(!file)return;if(file.size>100000)throw new Error('Die Textdatei darf höchstens 100 KB groß sein.');if(!/\.(txt|md)$/i.test(file.name))throw new Error('Bitte verwende eine .txt- oder .md-Datei.');const text=await file.text();if(text.length>max)throw new Error(`Die Datei enthält mehr als ${max.toLocaleString('de-DE')} Zeichen.`);if(target.value.trim()&&!confirm('Vorhandenen Text durch den Dateiinhalt ersetzen?'))return;target.value=text;target.dispatchEvent(new Event('input',{bubbles:true}));}
+ async function generateWithRetry(payload,form,status){
+  for(let attempt=1;attempt<=3;attempt++){
+   if(!form.isConnected)throw new Error('Die Aufgabenerstellung wurde verlassen.');
+   status.innerHTML=`<div class="loading" role="status"><strong>${attempt===1?'Die KI erstellt und prüft deine Aufgabe.':`Die Aufgabe wird automatisch neu generiert. Versuch ${attempt} von 3.`}</strong><p>Deine Einstellungen bleiben erhalten. Das kann etwas dauern.</p></div>`;
+   try{return await LernKI.request('/api/generate',{...payload,requestId:crypto.randomUUID()});}
+   catch(error){if(!form.isConnected||error.status&&error.status<500)throw error;if(attempt===3)throw new Error('Die Aufgabe konnte auch nach drei Versuchen nicht erstellt werden. Deine Einstellungen bleiben erhalten. Bitte versuche es später erneut.');}
+  }
+ }
  function mount(opts){options=opts;clearInterval(interval);const a=current();if(a.step>1&&!a.attempt)a.step=1;if(a.step===4&&!a.attempt?.submitted)a.step=3;
   opts.root.innerHTML=a.step===1?settings():a.step===2?taskView():a.step===3?writeView():feedbackView();
   const root=opts.root;
@@ -39,7 +47,7 @@ window.Schultraining=(()=>{
    try{
     let attempt;
     if(source==='reference')attempt=startReference();
-    else{status.innerHTML='<div class="loading" role="status"><strong>Die KI erstellt und prüft deine Aufgabe.</strong><p>Die Themenauswahl, Aufgabenanzahl und Punkte werden berücksichtigt. Das kann etwas dauern.</p></div>';form.querySelectorAll('input,textarea,select').forEach(el=>el.disabled=true);const task=await LernKI.request('/api/generate',{...config,source,subject:state.subject,grade:state.grade,variant:state.variant,requestId:crypto.randomUUID()});attempt={...task,points:task.criteria.reduce((n,c)=>n+c.max,0),text:'',submitted:false,remaining:task.minutes*60000,deadline:null,ai:null};}
+    else{form.querySelectorAll('input,textarea,select').forEach(el=>el.disabled=true);const task=await generateWithRetry({...config,source,subject:state.subject,grade:state.grade,variant:state.variant},form,status);attempt={...task,points:task.criteria.reduce((n,c)=>n+c.max,0),text:'',submitted:false,remaining:task.minutes*60000,deadline:null,ai:null};}
     if(captured.attempt?.text){captured.history ||= [];captured.history.push(captured.attempt);captured.history=captured.history.slice(-10);}
     captured.attempt=attempt;captured.step=2;persist();if(form.isConnected){mount(options);focus();}
    }catch(err){if(form.isConnected){status.innerHTML=`<p class="ai-error" role="alert">${e(err.name==='AbortError'?'Die Erstellung dauert zu lange. Deine Konfiguration bleibt erhalten. Bitte erneut versuchen.':err.message)}</p>`;form.querySelectorAll('input,textarea,select').forEach(el=>el.disabled=false);button.disabled=false;}}
