@@ -1,0 +1,141 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const {spawn}=require('node:child_process');
+const base=process.env.TEST_BASE_URL||'http://127.0.0.1:4173/';
+const out=path.join(__dirname,'../test-results');fs.mkdirSync(out,{recursive:true});
+let server;
+async function ready(){
+  try{const r=await fetch(base);if(r.ok)return;}catch{}
+  if(process.env.TEST_BASE_URL)throw new Error('Testadresse nicht erreichbar');
+  server=spawn('python3',['-m','http.server','4173','--bind','127.0.0.1','--directory','site'],{cwd:path.join(__dirname,'..'),stdio:'ignore'});
+  for(let i=0;i<30;i++){await new Promise(r=>setTimeout(r,200));try{if((await fetch(base)).ok)return;}catch{}}
+  throw new Error('Lokaler Server nicht erreichbar');
+}
+(async()=>{
+ await ready();const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:{})});
+ const page=await browser.newPage({viewport:{width:1440,height:1050},acceptDownloads:true});
+ const errors=[],report=[];page.on('pageerror',e=>errors.push(e.message));
+ const check=async(name,fn)=>{await fn();report.push({name,status:'passed'});console.log('OK',name);};
+ const choose=async(subject)=>{await page.locator(`[data-subject="${subject}"]`).click();};
+ const mode=async(m)=>{await page.locator(`[data-mode="${m}"]`).click();};
+ const axe=async(label)=>{
+  await page.addScriptTag({path:require.resolve('axe-core/axe.min.js')});
+  const result=await page.evaluate(async()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));
+  fs.writeFileSync(path.join(out,`axe-${label}.json`),JSON.stringify(result.violations,null,2));
+  assert.equal(result.violations.length,0,JSON.stringify(result.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))));
+ };
+ try{
+ await page.goto(base);await page.locator('#slope').waitFor();
+ await check('Lernschritte und interaktiver Graph',async()=>{
+  assert.match(await page.locator('.lesson-count').innerText(),/1 von 5/);
+  await page.locator('#slope').fill('2');await page.locator('#slope').dispatchEvent('input');
+  assert.match(await page.locator('#formula').innerText(),/2/);
+  await page.locator('[data-action="lesson-next"]').click();
+  assert.match(await page.locator('.lesson-sheet h3').innerText(),/Steigung/);
+  await page.screenshot({path:path.join(out,'desktop-lernen.png'),fullPage:true});
+  await axe('mathe-lernen');
+ });
+ await check('Numerische Prüfung, Hinweise und Speicherung',async()=>{
+  await mode('ueben');await page.locator('#answer').fill('3');await page.locator('#practice-form button[type=submit]').click();
+  assert.match(await page.locator('.feedback h4').innerText(),/stimmt/);
+  await page.locator('[data-exercise="1"]').click();await page.locator('[data-action=hint]').click();
+  assert.equal(await page.locator('.hint').count(),1);
+  await page.locator('#answer').fill('3');await page.locator('#practice-form button[type=submit]').click();
+  assert.match(await page.locator('.feedback h4').innerText(),/noch einmal/);
+  await page.locator('#answer').fill('7');await page.locator('#practice-form button[type=submit]').click();
+  await page.reload();await page.locator('#answer').waitFor();assert.equal(await page.locator('#answer').inputValue(),'7');
+  assert.equal(await page.locator('.hint').count(),1);
+  await axe('mathe-ueben');
+ });
+ await check('Vollständige Lerntexte für Deutsch und Englisch',async()=>{
+  await choose('deutsch');await mode('lernen');assert.match(await page.locator('.lesson-count').innerText(),/von 4/);
+  await mode('ueben');await page.locator('#answer').fill('Eigene Behauptung, Begründung und ein Beispiel.');
+  await page.locator('#practice-form button[type=submit]').click();await page.locator('#self-check').selectOption('klar');
+  assert.match(await page.locator('.feedback').innerText(),/Behauptung/);
+  await axe('deutsch-ueben');
+  await choose('englisch');await mode('lernen');assert.match(await page.locator('.lesson-count').innerText(),/von 5/);
+  assert.equal(await page.locator('.materials > details').count(),4);
+  await page.locator('.materials > details').nth(1).locator('summary').first().click();
+  const audio=page.locator('audio').first();await audio.evaluate(a=>a.load());
+  await page.waitForFunction(()=>document.querySelector('audio')?.duration>40);
+  assert.ok(await audio.evaluate(a=>a.duration)<90);
+  await axe('englisch-lernen');
+ });
+ for(const subject of ['mathematik','deutsch','englisch']){
+  for(const label of ['A','B']){
+   await check(`${subject} Übungssatz ${label}: Abgabe und Eigenkontrolle`,async()=>{
+    await choose(subject);await mode('schulaufgabe');await page.locator('#exam-variant').selectOption(label);
+    assert.equal(await page.locator('.exam-paper').count(),0);
+    await page.locator('#exam-start button[type=submit]').click();
+    assert.equal(await page.getByRole('heading',{name:'Erwartungshorizont',exact:true}).count(),0);
+    await page.locator('#exam-answer').fill('Meine Bearbeitung zu den Aufgaben. 1. Eigener Lösungsweg. 2. Begründung und Beispiel.');
+    await mode('lernen');await mode('schulaufgabe');
+    assert.match(await page.locator('#exam-answer').inputValue(),/Meine Bearbeitung/);
+    await page.locator('#exam-submit button[type=submit]').click();
+    assert.equal(await page.getByRole('heading',{name:'Erwartungshorizont',exact:true}).count(),1);
+    for(let i=0;i<4;i++)await page.locator(`#score-${i}`).selectOption('2');
+    assert.match(await page.locator('.result-total').innerText(),/8 von/);
+    await page.reload();await page.locator('.result-total').waitFor();assert.match(await page.locator('.result-total').innerText(),/8 von/);
+    if(label==='A')await axe(`${subject}-schulaufgabe`);
+   });
+  }
+ }
+ await check('Jahrgänge und Sprachfolge sind getrennt',async()=>{
+  for(const g of ['9','10','11']){await page.locator('#grade').selectOption(g);assert.ok(await page.locator('.topic-row').count()>3);assert.ok(await page.locator('#workspace').isHidden());}
+  await page.locator('#grade').selectOption('8');await page.locator('#variant').selectOption('E2');
+  assert.ok(await page.locator('#workspace').isHidden());assert.doesNotMatch(await page.locator('#planned').innerText(),/London/);
+  await page.locator('#grade').selectOption('9');assert.match(await page.locator('#planned').innerText(),/London/);
+  await page.locator('[data-action=demo]').click();assert.ok(await page.locator('#workspace').isVisible());
+ });
+ await check('Tastatur, Dialog und Export',async()=>{
+  await page.locator('[data-mode=lernen]').focus();await page.keyboard.press('ArrowRight');
+  assert.equal(await page.locator('[data-mode=ueben]').getAttribute('aria-selected'),'true');
+  await page.locator('#help-open').click();assert.ok(await page.locator('#info-dialog').isVisible());await page.keyboard.press('Escape');
+  assert.ok(await page.locator('#info-dialog').isHidden());
+  const downloadPromise=page.waitForEvent('download');await page.locator('#export').click();const download=await downloadPromise;
+  const target=path.join(out,'export.json');await download.saveAs(target);const saved=JSON.parse(fs.readFileSync(target,'utf8'));assert.equal(saved.learning_state.version,1);
+ });
+ await check('KI: Zustimmung, Rückmeldung, Speicherung und Verbindungsfehler',async()=>{
+  await choose('deutsch');await mode('ueben');await page.locator('[data-exercise="1"]').click();
+  await page.locator('#answer').fill('Der Treff sollte in einer längeren Pause stattfinden, weil dann mehr Jugendliche Zeit haben.');
+  let requests=0;
+  await page.route('**/api/grade',async route=>{requests++;await route.fulfill({status:200,contentType:'application/json',headers:{'Access-Control-Allow-Origin':new URL(base).origin},body:JSON.stringify({summary:'Deine Begründung ist nachvollziehbar.',strengths:['Klare Begründung.'],improvements:['Ergänze ein konkretes Beispiel.'],next_step:'Formuliere ein passendes Beispiel.',uncertainty:'',criteria:[{id:'inhalt',name:'Aufgabenerfüllung',score:2,max:2,reason:'Ein passender Grund ist vorhanden.'},{id:'darstellung',name:'Darstellung',score:1,max:2,reason:'Die Begründung ist verständlich.'}],errors:[],score:3,max:4,assessable_max:4,provisional:false,model:'test-fixture',task_id:'d2'})});});
+  await page.locator('.ai-request').click();assert.equal(requests,0);
+  await page.locator('.ai-consent input').check();await page.locator('.ai-request').click();await page.locator('.ai-result').waitFor();
+  assert.equal(requests,1);assert.match(await page.locator('.ai-points').innerText(),/3 von 4/);
+  await page.reload();await page.locator('.ai-result').waitFor();assert.match(await page.locator('.ai-result').innerText(),/nachvollziehbar/);
+  await page.locator('#answer').fill('Neue Fassung der Antwort.');assert.match(await page.locator('.ai-result').innerText(),/verändert/);
+  await page.unroute('**/api/grade');await page.route('**/api/grade',r=>r.abort('failed'));
+  await page.locator('.ai-consent input').check();await page.locator('.ai-request').click();await page.locator('.ai-error').waitFor();
+  assert.equal(await page.locator('#answer').inputValue(),'Neue Fassung der Antwort.');assert.equal(await page.locator('.ai-request').isEnabled(),true);
+  await page.unroute('**/api/grade');
+ });
+ await check('Mobile und Tablet: Darstellung und Kontraste',async()=>{
+  for(const width of [390,768,1024]){
+   await page.setViewportSize({width,height:1000});
+   for(const s of ['mathematik','deutsch','englisch']){
+    await choose(s);await mode('lernen');
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`Overflow ${width} ${s}`);
+   }
+   await page.screenshot({path:path.join(out,`viewport-${width}.png`),fullPage:true});
+  }
+  await page.setViewportSize({width:390,height:844});await choose('mathematik');await mode('lernen');await axe('mobile');
+  await page.screenshot({path:path.join(out,'mobile-lernen.png'),fullPage:true});
+ });
+ await check('Speicherfehler bleiben sichtbar',async()=>{
+  const isolated=await browser.newPage();await isolated.addInitScript(()=>Storage.prototype.setItem=function(){throw new Error('disabled');});
+  await isolated.goto(base);await isolated.locator('#slope').waitFor();
+  assert.match(await isolated.locator('#save-state').innerText(),/nicht verfügbar/);await isolated.close();
+ });
+ await check('Lernstand bewusst zurücksetzen',async()=>{
+  await page.setViewportSize({width:1440,height:1000});await page.locator('#reset-open').click();await page.locator('#reset-dialog [data-close]').click();
+  assert.ok(await page.evaluate(()=>JSON.parse(localStorage.getItem('lernatelier-test-v1')).answers.m1.correct));
+  await page.locator('#reset-open').click();await page.locator('#reset-confirm').click();
+  assert.equal(await page.evaluate(()=>Object.keys(JSON.parse(localStorage.getItem('lernatelier-test-v1')).answers).length),0);
+ });
+ assert.deepEqual(errors,[]);fs.writeFileSync(path.join(out,'results.json'),JSON.stringify({base,checks:report,pageErrors:errors},null,2));
+ console.log(`${report.length} Prüfungen bestanden, keine JavaScript-Fehler.`);
+ }finally{await browser.close();server?.kill();}
+})().catch(e=>{console.error(e);server?.kill();process.exitCode=1;});

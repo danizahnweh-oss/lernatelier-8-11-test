@@ -1,0 +1,2180 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-17",
+  "school_type": "Gymnasium",
+  "state": "Bayern",
+  "curriculum": "G9 LehrplanPLUS",
+  "status": "Redaktioneller Entwurf; keine fachliche Freigabe oder App-Integration",
+  "coverage": "Planungsübersicht der Lernbereiche; keine vollständige Einzelkompetenz-Abdeckung",
+  "learning_modes": [
+    {
+      "id": "lernen",
+      "label": "Stoff lernen",
+      "equal_navigation_priority": true,
+      "sequence": [
+        "Erklärung",
+        "Beispiel",
+        "Verständnisfrage",
+        "eigener Versuch"
+      ]
+    },
+    {
+      "id": "ueben",
+      "label": "Unterricht üben",
+      "equal_navigation_priority": true,
+      "sequence": [
+        "Aufgabe",
+        "optional gestufte Hinweise",
+        "eigene Lösung",
+        "Rückmeldung",
+        "erneuter Versuch"
+      ]
+    },
+    {
+      "id": "schulaufgabe",
+      "label": "Schulaufgaben vorbereiten",
+      "equal_navigation_priority": true,
+      "sequence": [
+        "Stoff und Format wählen",
+        "Hilfsmittel und Zeit festlegen",
+        "selbstständig bearbeiten",
+        "Auswertung",
+        "gezielte Wiederholung"
+      ]
+    }
+  ],
+  "grading_policy": {
+    "default": "Kompetenzbezogene Rückmeldung und transparente Übungspunkte",
+    "school_grade": "Nur mit ausdrücklich gewähltem, versioniertem Notenschlüssel; keine voreingestellten Abitur-Notenpunkte",
+    "practice_points": "Eigene didaktische Vorschläge, keine amtlichen Bewertungsraster"
+  },
+  "groups": [
+    {
+      "id": "mathematik-8",
+      "subject": "mathematik",
+      "grade": 8,
+      "sources": [
+        {
+          "id": "standard",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/8/mathematik",
+          "checked_at": "2026-10-17"
+        }
+      ],
+      "variants": [
+        "gemeinsam"
+      ],
+      "entry_skills": [
+        "Rationale Zahlen und Brüche",
+        "Terme auswerten",
+        "Lineare Gleichungen",
+        "Koordinatensystem"
+      ],
+      "exercise_formats": [
+        "Rechenweg",
+        "Graph und Wertetabelle",
+        "Sachaufgabe",
+        "Fehler erklären"
+      ],
+      "topics": [
+        {
+          "id": "mathematik-8-01",
+          "title": "Funktionen und Terme",
+          "curriculum_sections": [
+            "M8 1"
+          ],
+          "competency_goal": "Zuordnungen als Funktionen erkennen und Darstellungen verbinden.",
+          "prerequisite_skills": [
+            "Rationale Zahlen und Brüche",
+            "Terme auswerten",
+            "Lineare Gleichungen",
+            "Koordinatensystem"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-8-02",
+          "title": "Lineare Funktionen",
+          "curriculum_sections": [
+            "M8 2"
+          ],
+          "competency_goal": "Steigung und Achsenabschnitt deuten sowie Geraden zeichnen und bestimmen.",
+          "prerequisite_skills": [
+            "Rationale Zahlen und Brüche",
+            "Terme auswerten",
+            "Lineare Gleichungen",
+            "Koordinatensystem"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R1",
+          "status": "Referenzentwurf ausgearbeitet",
+          "variant": "gemeinsam",
+          "reference_package": "referenzpakete/mathe-8-lineare-funktionen.md"
+        },
+        {
+          "id": "mathematik-8-03",
+          "title": "Elementare gebrochen-rationale Funktionen",
+          "curriculum_sections": [
+            "M8 3"
+          ],
+          "competency_goal": "Hyperbeln, Definitionslücken und asymptotisches Verhalten beschreiben.",
+          "prerequisite_skills": [
+            "Rationale Zahlen und Brüche",
+            "Terme auswerten",
+            "Lineare Gleichungen",
+            "Koordinatensystem"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-8-04",
+          "title": "Bruchterme und Bruchgleichungen",
+          "curriculum_sections": [
+            "M8 4"
+          ],
+          "competency_goal": "Definitionsmenge beachten, Terme umformen und Gleichungen lösen.",
+          "prerequisite_skills": [
+            "Rationale Zahlen und Brüche",
+            "Terme auswerten",
+            "Lineare Gleichungen",
+            "Koordinatensystem"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-8-05",
+          "title": "Laplace-Experimente",
+          "curriculum_sections": [
+            "M8 5"
+          ],
+          "competency_goal": "Gleichwahrscheinliche Ergebnisse erkennen und Wahrscheinlichkeiten begründen.",
+          "prerequisite_skills": [
+            "Rationale Zahlen und Brüche",
+            "Terme auswerten",
+            "Lineare Gleichungen",
+            "Koordinatensystem"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-8-06",
+          "title": "Lineare Gleichungssysteme",
+          "curriculum_sections": [
+            "M8 6"
+          ],
+          "competency_goal": "Zwei lineare Bedingungen graphisch und rechnerisch gemeinsam lösen.",
+          "prerequisite_skills": [
+            "Rationale Zahlen und Brüche",
+            "Terme auswerten",
+            "Lineare Gleichungen",
+            "Koordinatensystem"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-8-07",
+          "title": "Kreis und Zylinder",
+          "curriculum_sections": [
+            "M8 7"
+          ],
+          "competency_goal": "Umfang, Flächen und Volumina bestimmen und Formeln erklären.",
+          "prerequisite_skills": [
+            "Rationale Zahlen und Brüche",
+            "Terme auswerten",
+            "Lineare Gleichungen",
+            "Koordinatensystem"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        }
+      ]
+    },
+    {
+      "id": "mathematik-9",
+      "subject": "mathematik",
+      "grade": 9,
+      "sources": [
+        {
+          "id": "standard",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/9/mathematik",
+          "checked_at": "2026-10-17"
+        }
+      ],
+      "variants": [
+        "gemeinsam"
+      ],
+      "entry_skills": [
+        "Lineare Funktionen und Gleichungen",
+        "Bruchterme",
+        "Winkel und Dreiecke"
+      ],
+      "exercise_formats": [
+        "Rechenweg",
+        "Funktionsgraph",
+        "Modellierung",
+        "Begründung"
+      ],
+      "topics": [
+        {
+          "id": "mathematik-9-01",
+          "title": "Quadratwurzeln und reelle Zahlen",
+          "curriculum_sections": [
+            "M9 1"
+          ],
+          "competency_goal": "Wurzeln einordnen, vereinfachen und Zahlbereichserweiterung erklären.",
+          "prerequisite_skills": [
+            "Lineare Funktionen und Gleichungen",
+            "Bruchterme",
+            "Winkel und Dreiecke"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-9-02",
+          "title": "Quadratische Funktionen und Gleichungen",
+          "curriculum_sections": [
+            "M9 2.1"
+          ],
+          "competency_goal": "Parabeldarstellungen wechseln und passende Lösungsverfahren auswählen.",
+          "prerequisite_skills": [
+            "Lineare Funktionen und Gleichungen",
+            "Bruchterme",
+            "Winkel und Dreiecke"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R1",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-9-03",
+          "title": "Quadratische Funktionen in Anwendungen",
+          "curriculum_sections": [
+            "M9 2.2"
+          ],
+          "competency_goal": "Modelle aufstellen, auswerten und ihre Grenzen erläutern.",
+          "prerequisite_skills": [
+            "Lineare Funktionen und Gleichungen",
+            "Bruchterme",
+            "Winkel und Dreiecke"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-9-04",
+          "title": "Wahrscheinlichkeit verknüpfter Ereignisse",
+          "curriculum_sections": [
+            "M9 3"
+          ],
+          "competency_goal": "Ereignisse verknüpfen und Wahrscheinlichkeiten bestimmen.",
+          "prerequisite_skills": [
+            "Lineare Funktionen und Gleichungen",
+            "Bruchterme",
+            "Winkel und Dreiecke"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-9-05",
+          "title": "Ähnlichkeit und Strahlensatz",
+          "curriculum_sections": [
+            "M9 4"
+          ],
+          "competency_goal": "Ähnliche Figuren erkennen und unbekannte Strecken berechnen.",
+          "prerequisite_skills": [
+            "Lineare Funktionen und Gleichungen",
+            "Bruchterme",
+            "Winkel und Dreiecke"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-9-06",
+          "title": "Potenzfunktionen und Potenzbegriff",
+          "curriculum_sections": [
+            "M9 5"
+          ],
+          "competency_goal": "Potenzgesetze anwenden und Funktionseigenschaften beschreiben.",
+          "prerequisite_skills": [
+            "Lineare Funktionen und Gleichungen",
+            "Bruchterme",
+            "Winkel und Dreiecke"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-9-07",
+          "title": "Satz des Pythagoras",
+          "curriculum_sections": [
+            "M9 6"
+          ],
+          "competency_goal": "Rechtwinklige Situationen modellieren und Längen berechnen.",
+          "prerequisite_skills": [
+            "Lineare Funktionen und Gleichungen",
+            "Bruchterme",
+            "Winkel und Dreiecke"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-9-08",
+          "title": "Trigonometrie am Dreieck",
+          "curriculum_sections": [
+            "M9 7.1",
+            "M9 7.2"
+          ],
+          "competency_goal": "Winkel und Seiten mit geeigneten trigonometrischen Beziehungen bestimmen.",
+          "prerequisite_skills": [
+            "Lineare Funktionen und Gleichungen",
+            "Bruchterme",
+            "Winkel und Dreiecke"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        }
+      ]
+    },
+    {
+      "id": "mathematik-10",
+      "subject": "mathematik",
+      "grade": 10,
+      "sources": [
+        {
+          "id": "standard",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/10/mathematik",
+          "checked_at": "2026-10-17"
+        }
+      ],
+      "variants": [
+        "gemeinsam"
+      ],
+      "entry_skills": [
+        "Potenzen und Funktionen",
+        "Quadratische Gleichungen",
+        "Trigonometrie am Dreieck",
+        "Wahrscheinlichkeit"
+      ],
+      "exercise_formats": [
+        "Funktionsvergleich",
+        "Sachmodell",
+        "Baumdiagramm",
+        "Körperskizze"
+      ],
+      "topics": [
+        {
+          "id": "mathematik-10-01",
+          "title": "Exponentielles Wachstum und Logarithmus",
+          "curriculum_sections": [
+            "M10 1"
+          ],
+          "competency_goal": "Wachstumsmodelle aufstellen, mit linearen Modellen vergleichen und Gleichungen lösen.",
+          "prerequisite_skills": [
+            "Potenzen und Funktionen",
+            "Quadratische Gleichungen",
+            "Trigonometrie am Dreieck",
+            "Wahrscheinlichkeit"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R1",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-10-02",
+          "title": "Zusammengesetzte Zufallsexperimente und Simulation",
+          "curriculum_sections": [
+            "M10 2"
+          ],
+          "competency_goal": "Baumdiagramme und Pfadregeln verwenden sowie Simulationen auswerten.",
+          "prerequisite_skills": [
+            "Potenzen und Funktionen",
+            "Quadratische Gleichungen",
+            "Trigonometrie am Dreieck",
+            "Wahrscheinlichkeit"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-10-03",
+          "title": "Sinus- und Kosinusfunktion",
+          "curriculum_sections": [
+            "M10 3"
+          ],
+          "competency_goal": "Periodische Vorgänge über Einheitskreis und Funktionsparameter beschreiben.",
+          "prerequisite_skills": [
+            "Potenzen und Funktionen",
+            "Quadratische Gleichungen",
+            "Trigonometrie am Dreieck",
+            "Wahrscheinlichkeit"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-10-04",
+          "title": "Ganzrationale Funktionen",
+          "curriculum_sections": [
+            "M10 4"
+          ],
+          "competency_goal": "Nullstellen, Symmetrie und Randverhalten zur Graphenskizze nutzen.",
+          "prerequisite_skills": [
+            "Potenzen und Funktionen",
+            "Quadratische Gleichungen",
+            "Trigonometrie am Dreieck",
+            "Wahrscheinlichkeit"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-10-05",
+          "title": "Raumgeometrie mit Pyramide, Kegel und Kugel",
+          "curriculum_sections": [
+            "M10 5"
+          ],
+          "competency_goal": "Körper darstellen sowie Oberflächen und Volumina begründen und berechnen.",
+          "prerequisite_skills": [
+            "Potenzen und Funktionen",
+            "Quadratische Gleichungen",
+            "Trigonometrie am Dreieck",
+            "Wahrscheinlichkeit"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        }
+      ]
+    },
+    {
+      "id": "mathematik-11",
+      "subject": "mathematik",
+      "grade": 11,
+      "sources": [
+        {
+          "id": "standard",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/11/mathematik",
+          "checked_at": "2026-10-17"
+        }
+      ],
+      "variants": [
+        "gemeinsam"
+      ],
+      "entry_skills": [
+        "Funktionstypen aus 8–10",
+        "Termumformungen und Gleichungen",
+        "Mehrstufige Zufallsexperimente"
+      ],
+      "exercise_formats": [
+        "Graphenanalyse",
+        "Grenzwertdeutung",
+        "Differenzenquotient",
+        "Vierfeldertafel",
+        "Begründung"
+      ],
+      "topics": [
+        {
+          "id": "mathematik-11-01",
+          "title": "Spezielle Eigenschaften von Funktionen",
+          "curriculum_sections": [
+            "M11 1"
+          ],
+          "competency_goal": "Transformationen, Symmetrie, Stetigkeit und Grenzverhalten beschreiben.",
+          "prerequisite_skills": [
+            "Funktionstypen aus 8–10",
+            "Termumformungen und Gleichungen",
+            "Mehrstufige Zufallsexperimente"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-11-02",
+          "title": "Gebrochen-rationale Funktionen",
+          "curriculum_sections": [
+            "M11 2"
+          ],
+          "competency_goal": "Nullstellen, Polstellen, Grenzwerte und Asymptoten untersuchen.",
+          "prerequisite_skills": [
+            "Funktionstypen aus 8–10",
+            "Termumformungen und Gleichungen",
+            "Mehrstufige Zufallsexperimente"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-11-03",
+          "title": "Bedingte Wahrscheinlichkeit und Unabhängigkeit",
+          "curriculum_sections": [
+            "M11 3"
+          ],
+          "competency_goal": "Bezugsgruppen unterscheiden und bedingte Wahrscheinlichkeiten berechnen.",
+          "prerequisite_skills": [
+            "Funktionstypen aus 8–10",
+            "Termumformungen und Gleichungen",
+            "Mehrstufige Zufallsexperimente"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-11-04",
+          "title": "Lokales und globales Differenzieren",
+          "curriculum_sections": [
+            "M11 4.1"
+          ],
+          "competency_goal": "Mittlere und lokale Änderungsrate unterscheiden und Ableitungen bestimmen.",
+          "prerequisite_skills": [
+            "Funktionstypen aus 8–10",
+            "Termumformungen und Gleichungen",
+            "Mehrstufige Zufallsexperimente"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R1",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "mathematik-11-05",
+          "title": "Differentialrechnung an ganzrationalen Funktionen",
+          "curriculum_sections": [
+            "M11 4.2"
+          ],
+          "competency_goal": "Ableitungen für Monotonie, Extremstellen und weitere Funktionsuntersuchungen nutzen.",
+          "prerequisite_skills": [
+            "Funktionstypen aus 8–10",
+            "Termumformungen und Gleichungen",
+            "Mehrstufige Zufallsexperimente"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        }
+      ]
+    },
+    {
+      "id": "deutsch-8",
+      "subject": "deutsch",
+      "grade": 8,
+      "sources": [
+        {
+          "id": "standard",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/8/deutsch",
+          "checked_at": "2026-10-17"
+        }
+      ],
+      "variants": [
+        "gemeinsam"
+      ],
+      "entry_skills": [
+        "Lesestrategien",
+        "Grundformen Informieren und Argumentieren",
+        "Satzbau und Textgliederung"
+      ],
+      "exercise_formats": [
+        "Text markieren und belegen",
+        "Absatz schreiben",
+        "Gliederung",
+        "Aufsatz",
+        "Text überarbeiten",
+        "mündlicher Beitrag"
+      ],
+      "topics": [
+        {
+          "id": "deutsch-8-01",
+          "title": "Linear argumentieren",
+          "curriculum_sections": [
+            "D8 3.2"
+          ],
+          "competency_goal": "Einen Standpunkt mit schlüssigen Argumenten und passenden Beispielen begründen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R1",
+          "status": "Referenzentwurf ausgearbeitet",
+          "variant": "gemeinsam",
+          "reference_package": "referenzpakete/deutsch-8-linear-argumentieren.md"
+        },
+        {
+          "id": "deutsch-8-02",
+          "title": "Materialgestützt informieren",
+          "curriculum_sections": [
+            "D8 3.2"
+          ],
+          "competency_goal": "Informationen auswählen, ordnen und adressatengerecht erklären.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-8-03",
+          "title": "Epik, Drama und Lyrik erschließen",
+          "curriculum_sections": [
+            "D8 2.2",
+            "D8 3.2"
+          ],
+          "competency_goal": "Inhalt, Aufbau und Gestaltung mit Textstellen erläutern.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-8-04",
+          "title": "Journalistische Texte und Medien prüfen",
+          "curriculum_sections": [
+            "D8 2.3",
+            "D8 2.4"
+          ],
+          "competency_goal": "Textsorte, Absicht und Verlässlichkeit von Aussagen unterscheiden.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-8-05",
+          "title": "Sprache, Grammatik und Rechtschreibung",
+          "curriculum_sections": [
+            "D8 4.1",
+            "D8 4.2",
+            "D8 4.3"
+          ],
+          "competency_goal": "Sprachliche Strukturen erklären und eigene Fehler gezielt verbessern.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-8-06",
+          "title": "Zuhören, diskutieren und präsentieren",
+          "curriculum_sections": [
+            "D8 1.1",
+            "D8 1.2",
+            "D8 1.3",
+            "D8 1.4"
+          ],
+          "competency_goal": "Beiträge verstehen, geordnet sprechen und auf andere eingehen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-8-07",
+          "title": "Texte planen und überarbeiten",
+          "curriculum_sections": [
+            "D8 3.1",
+            "D8 3.3"
+          ],
+          "competency_goal": "Texte auf Zusammenhang, Ausdruck und Form prüfen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        }
+      ]
+    },
+    {
+      "id": "deutsch-9",
+      "subject": "deutsch",
+      "grade": 9,
+      "sources": [
+        {
+          "id": "standard",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/9/deutsch",
+          "checked_at": "2026-10-17"
+        }
+      ],
+      "variants": [
+        "gemeinsam"
+      ],
+      "entry_skills": [
+        "Lesestrategien",
+        "Grundformen Informieren und Argumentieren",
+        "Satzbau und Textgliederung"
+      ],
+      "exercise_formats": [
+        "Text markieren und belegen",
+        "Absatz schreiben",
+        "Gliederung",
+        "Aufsatz",
+        "Text überarbeiten",
+        "mündlicher Beitrag"
+      ],
+      "topics": [
+        {
+          "id": "deutsch-9-01",
+          "title": "Erörtern mit Gegenargumenten",
+          "curriculum_sections": [
+            "D9 3.2"
+          ],
+          "competency_goal": "Material einbeziehen, Gegenargumente prüfen und begründet abwägen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R1",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-9-02",
+          "title": "Literarische Texte und Deutungshypothesen",
+          "curriculum_sections": [
+            "D9 2.2",
+            "D9 3.2"
+          ],
+          "competency_goal": "Eine erste Deutung durch Inhalt, Gestaltung und Textbelege stützen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-9-03",
+          "title": "Informieren, zitieren und Quellen verwenden",
+          "curriculum_sections": [
+            "D9 3.1",
+            "D9 3.2"
+          ],
+          "competency_goal": "Materialien sachgerecht in eigene Texte einarbeiten.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-9-04",
+          "title": "Sachtexte, Medien und Manipulation",
+          "curriculum_sections": [
+            "D9 2.3",
+            "D9 2.4",
+            "D9 4.1"
+          ],
+          "competency_goal": "Aussagen und Wirkungsabsichten kritisch untersuchen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-9-05",
+          "title": "Sprache, Rechtschreibung und Überarbeitung",
+          "curriculum_sections": [
+            "D9 3.3",
+            "D9 4.2",
+            "D9 4.3"
+          ],
+          "competency_goal": "Logik, Verknüpfungen und sprachliche Richtigkeit verbessern.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-9-06",
+          "title": "Zuhören, Debatte und Präsentation",
+          "curriculum_sections": [
+            "D9 1.1",
+            "D9 1.2",
+            "D9 1.3",
+            "D9 1.4"
+          ],
+          "competency_goal": "Beiträge strukturiert vortragen und auf Positionen eingehen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        }
+      ]
+    },
+    {
+      "id": "deutsch-10",
+      "subject": "deutsch",
+      "grade": 10,
+      "sources": [
+        {
+          "id": "standard",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/10/deutsch",
+          "checked_at": "2026-10-17"
+        }
+      ],
+      "variants": [
+        "gemeinsam"
+      ],
+      "entry_skills": [
+        "Lesestrategien",
+        "Grundformen Informieren und Argumentieren",
+        "Satzbau und Textgliederung"
+      ],
+      "exercise_formats": [
+        "Text markieren und belegen",
+        "Absatz schreiben",
+        "Gliederung",
+        "Aufsatz",
+        "Text überarbeiten",
+        "mündlicher Beitrag"
+      ],
+      "topics": [
+        {
+          "id": "deutsch-10-01",
+          "title": "Pragmatische Texte analysieren",
+          "curriculum_sections": [
+            "D10 2.3",
+            "D10 3.2"
+          ],
+          "competency_goal": "Argumentation, Sprache, Adressatenbezug und Intention zusammenführen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R1",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-10-02",
+          "title": "Literarische Texte begründet deuten",
+          "curriculum_sections": [
+            "D10 2.2",
+            "D10 3.2"
+          ],
+          "competency_goal": "Deutungshypothesen an Gestaltung und Kontext überprüfen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-10-03",
+          "title": "Erörtern und essayistisches Schreiben",
+          "curriculum_sections": [
+            "D10 3.2"
+          ],
+          "competency_goal": "Komplexere Themen differenziert und materialbezogen behandeln.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-10-04",
+          "title": "Recherche, Exzerpt und Quellenarbeit",
+          "curriculum_sections": [
+            "D10 2.1",
+            "D10 3.1"
+          ],
+          "competency_goal": "Relevante Informationen auswählen und korrekt nachweisen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-10-05",
+          "title": "Sprachwandel, Register und Medien",
+          "curriculum_sections": [
+            "D10 2.4",
+            "D10 4.1",
+            "D10 4.2"
+          ],
+          "competency_goal": "Sprachgebrauch und mediale Darstellung reflektieren.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-10-06",
+          "title": "Schreiben überarbeiten und präsentieren",
+          "curriculum_sections": [
+            "D10 3.3",
+            "D10 4.3",
+            "D10 1"
+          ],
+          "competency_goal": "Zusammenhang und Korrektheit sichern sowie Ergebnisse verständlich vermitteln.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        }
+      ]
+    },
+    {
+      "id": "deutsch-11",
+      "subject": "deutsch",
+      "grade": 11,
+      "sources": [
+        {
+          "id": "standard",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/11/deutsch",
+          "checked_at": "2026-10-17"
+        }
+      ],
+      "variants": [
+        "gemeinsam"
+      ],
+      "entry_skills": [
+        "Lesestrategien",
+        "Grundformen Informieren und Argumentieren",
+        "Satzbau und Textgliederung"
+      ],
+      "exercise_formats": [
+        "Text markieren und belegen",
+        "Absatz schreiben",
+        "Gliederung",
+        "Aufsatz",
+        "Text überarbeiten",
+        "mündlicher Beitrag"
+      ],
+      "topics": [
+        {
+          "id": "deutsch-11-01",
+          "title": "Literarische Interpretation",
+          "curriculum_sections": [
+            "D11 2.2",
+            "D11 3.2"
+          ],
+          "competency_goal": "Eine begründete Deutung aus Inhalt, Form und Kontext entwickeln.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R1",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-11-02",
+          "title": "Literatur des 17. und 18. Jahrhunderts",
+          "curriculum_sections": [
+            "D11 2.2"
+          ],
+          "competency_goal": "Barock, Aufklärung und Sturm und Drang anhand von Texten vergleichen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-11-03",
+          "title": "Pragmatische Texte analysieren und vergleichen",
+          "curriculum_sections": [
+            "D11 2.3",
+            "D11 3.2"
+          ],
+          "competency_goal": "Argumentationsweise und Wirkungsabsicht differenziert beurteilen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-11-04",
+          "title": "Erörtern, Kommentieren und Essay",
+          "curriculum_sections": [
+            "D11 3.2"
+          ],
+          "competency_goal": "Komplexe Positionen textbezogen oder materialgestützt abwägen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-11-05",
+          "title": "Recherche und wissenschaftsnahes Arbeiten",
+          "curriculum_sections": [
+            "D11 2.1",
+            "D11 3.1"
+          ],
+          "competency_goal": "Exzerpte, Zitate und Quellen zielgerichtet verwenden.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-11-06",
+          "title": "Sprachreflexion und digitale Öffentlichkeit",
+          "curriculum_sections": [
+            "D11 4.1",
+            "D11 4.2",
+            "D11 2.4"
+          ],
+          "competency_goal": "Sprachwandel und persuasive Kommunikation untersuchen.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "deutsch-11-07",
+          "title": "Überarbeiten, Zuhören und Vortragen",
+          "curriculum_sections": [
+            "D11 3.3",
+            "D11 4.3",
+            "D11 1"
+          ],
+          "competency_goal": "Präzise Texte gestalten und mündliche Beiträge reflektieren.",
+          "prerequisite_skills": [
+            "Lesestrategien",
+            "Grundformen Informieren und Argumentieren",
+            "Satzbau und Textgliederung"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        }
+      ]
+    },
+    {
+      "id": "englisch-8",
+      "subject": "englisch",
+      "grade": 8,
+      "sources": [
+        {
+          "id": "E1",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/8/englisch/1-fremdsprache",
+          "checked_at": "2026-10-17"
+        },
+        {
+          "id": "E2",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/8/englisch/2-fremdsprache",
+          "checked_at": "2026-10-17"
+        }
+      ],
+      "variants": [
+        "E1",
+        "E2"
+      ],
+      "entry_skills": [
+        "Grundlegender Wortschatz",
+        "Einfache zusammenhängende Texte verstehen",
+        "Bekannte Zeitformen"
+      ],
+      "exercise_formats": [
+        "Reading",
+        "Listening",
+        "Writing",
+        "Speaking",
+        "Mediation",
+        "Wortschatz und Grammatik im Kontext"
+      ],
+      "topics": [
+        {
+          "id": "englisch-8-01",
+          "title": "London und Stadtleben",
+          "curriculum_sections": [
+            "E8 5",
+            "E8 1.1",
+            "E8 3"
+          ],
+          "competency_goal": "Informationen entnehmen, einen Besuch planen und Vorschläge begründen.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R1",
+          "status": "Referenzentwurf ausgearbeitet",
+          "variant": "E1",
+          "reference_package": "referenzpakete/englisch-8-london.md"
+        },
+        {
+          "id": "englisch-8-02",
+          "title": "Kanada und Jugendliche in Nordamerika",
+          "curriculum_sections": [
+            "E8 5",
+            "E8 2"
+          ],
+          "competency_goal": "Alltag und kulturelle Perspektiven beschreiben und vergleichen.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "E1/E2",
+          "release_by_variant": {
+            "E1": "R2",
+            "E2": "R1"
+          }
+        },
+        {
+          "id": "englisch-8-03",
+          "title": "USA und historische Grundlagen",
+          "curriculum_sections": [
+            "E8 5",
+            "E8 2"
+          ],
+          "competency_goal": "Historische Informationen verstehen und Perspektiven unterscheiden.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "E1/E2"
+        },
+        {
+          "id": "englisch-8-04",
+          "title": "Politik, Regionen und aktuelle Themen",
+          "curriculum_sections": [
+            "E8 5",
+            "E8 2"
+          ],
+          "competency_goal": "Altersgemäße politische und geografische Zusammenhänge erschließen.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "E1/E2, mit unterschiedlichen Einzelthemen"
+        },
+        {
+          "id": "englisch-8-05",
+          "title": "Medien und Kommunikation",
+          "curriculum_sections": [
+            "E8 3",
+            "E8 4",
+            "E8 5"
+          ],
+          "competency_goal": "Quellen und Kommunikationssituationen erkennen sowie Mediennutzung reflektieren.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "E1/E2"
+        },
+        {
+          "id": "englisch-8-06",
+          "title": "Lesen, Hören und Hörsehen",
+          "curriculum_sections": [
+            "E8 1.1"
+          ],
+          "competency_goal": "Hauptaussagen, Details und Sprecherabsichten erschließen.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "E1/E2"
+        },
+        {
+          "id": "englisch-8-07",
+          "title": "Schreiben, Sprechen und Sprachmittlung",
+          "curriculum_sections": [
+            "E8 1.1",
+            "E8 3"
+          ],
+          "competency_goal": "Zusammenhängend und adressatengerecht kommunizieren.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "E1/E2"
+        },
+        {
+          "id": "englisch-8-08",
+          "title": "Wortschatz, Grammatik und Lernstrategien",
+          "curriculum_sections": [
+            "E8 1.2",
+            "E8 4"
+          ],
+          "competency_goal": "Sprachliche Mittel passend einsetzen und eigene Fehler bearbeiten.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "E1/E2"
+        }
+      ]
+    },
+    {
+      "id": "englisch-9",
+      "subject": "englisch",
+      "grade": 9,
+      "sources": [
+        {
+          "id": "E1",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/9/englisch/1-fremdsprache",
+          "checked_at": "2026-10-17"
+        },
+        {
+          "id": "E2",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/9/englisch/2-fremdsprache",
+          "checked_at": "2026-10-17"
+        }
+      ],
+      "variants": [
+        "E1",
+        "E2"
+      ],
+      "entry_skills": [
+        "Grundlegender Wortschatz",
+        "Einfache zusammenhängende Texte verstehen",
+        "Bekannte Zeitformen"
+      ],
+      "exercise_formats": [
+        "Reading",
+        "Listening",
+        "Writing",
+        "Speaking",
+        "Mediation",
+        "Wortschatz und Grammatik im Kontext"
+      ],
+      "topics": [
+        {
+          "id": "englisch-9-01",
+          "title": "Berufswelt und Praktikum",
+          "curriculum_sections": [
+            "E9 5",
+            "E9 1.1"
+          ],
+          "competency_goal": "Berufliche Alltagssituationen sprachlich bewältigen und Interessen begründen.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R1",
+          "status": "geplant",
+          "variant": "E1/E2"
+        },
+        {
+          "id": "englisch-9-02",
+          "title": "Australien und Neuseeland",
+          "curriculum_sections": [
+            "E9 5",
+            "E9 2"
+          ],
+          "competency_goal": "Landeskundliche Informationen erschließen und Perspektiven vergleichen.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "E1/E2"
+        },
+        {
+          "id": "englisch-9-03",
+          "title": "Bildung, Konsum und Medien",
+          "curriculum_sections": [
+            "E9 5",
+            "E9 3"
+          ],
+          "competency_goal": "Informationen auswerten und zu vertrauten Fragen Stellung nehmen.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "E1/E2"
+        },
+        {
+          "id": "englisch-9-04",
+          "title": "London und Stadtleben",
+          "curriculum_sections": [
+            "E9 5",
+            "E9 2"
+          ],
+          "competency_goal": "Eine Weltstadt in ihren gesellschaftlichen und kulturellen Aspekten erschließen.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "E2"
+        },
+        {
+          "id": "englisch-9-05",
+          "title": "Lesen, Hören und Textarbeit",
+          "curriculum_sections": [
+            "E9 1.1",
+            "E9 3"
+          ],
+          "competency_goal": "Längere Texte erschließen und Aussagen mit Belegen erläutern.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "E1/E2"
+        },
+        {
+          "id": "englisch-9-06",
+          "title": "Schreiben, Sprechen und Sprachmittlung",
+          "curriculum_sections": [
+            "E9 1.1",
+            "E9 3"
+          ],
+          "competency_goal": "Informationen adressatengerecht vermitteln und Positionen begründen.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "E1/E2"
+        },
+        {
+          "id": "englisch-9-07",
+          "title": "Sprachliche Mittel und Methoden",
+          "curriculum_sections": [
+            "E9 1.2",
+            "E9 4"
+          ],
+          "competency_goal": "Wortschatz und Strukturen vernetzen und eigenständig überarbeiten.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "E1/E2"
+        }
+      ]
+    },
+    {
+      "id": "englisch-10",
+      "subject": "englisch",
+      "grade": 10,
+      "sources": [
+        {
+          "id": "standard",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/10/englisch",
+          "checked_at": "2026-10-17"
+        }
+      ],
+      "variants": [
+        "E1/E2 gemeinsam"
+      ],
+      "entry_skills": [
+        "Grundlegender Wortschatz",
+        "Einfache zusammenhängende Texte verstehen",
+        "Bekannte Zeitformen"
+      ],
+      "exercise_formats": [
+        "Reading",
+        "Listening",
+        "Writing",
+        "Speaking",
+        "Mediation",
+        "Wortschatz und Grammatik im Kontext"
+      ],
+      "topics": [
+        {
+          "id": "englisch-10-01",
+          "title": "Jugendkultur und Medien",
+          "curriculum_sections": [
+            "E10 5",
+            "E10 3"
+          ],
+          "competency_goal": "Positionen zu jugendnahen Themen verstehen und argumentativ darstellen.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R1",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "englisch-10-02",
+          "title": "Schottland",
+          "curriculum_sections": [
+            "E10 5",
+            "E10 2"
+          ],
+          "competency_goal": "Geschichte und Gesellschaft in geeigneten Texten erschließen.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "englisch-10-03",
+          "title": "African Americans und gesellschaftlicher Wandel",
+          "curriculum_sections": [
+            "E10 5",
+            "E10 2"
+          ],
+          "competency_goal": "Historische Entwicklungen mit gesellschaftlichen Perspektiven verbinden.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "englisch-10-04",
+          "title": "Roman, Kurztexte und Film",
+          "curriculum_sections": [
+            "E10 5",
+            "E10 3"
+          ],
+          "competency_goal": "Handlung, Figuren und Gestaltung auswerten.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "englisch-10-05",
+          "title": "Lesen, Hören und Hörsehen",
+          "curriculum_sections": [
+            "E10 1.1"
+          ],
+          "competency_goal": "Informationen, Standpunkte und Absichten differenziert verstehen.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "englisch-10-06",
+          "title": "Argumentieren, Sprechen und Sprachmittlung",
+          "curriculum_sections": [
+            "E10 1.1",
+            "E10 3"
+          ],
+          "competency_goal": "Kohärent schreiben und adressatengerecht vermitteln.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "englisch-10-07",
+          "title": "Sprachliche Mittel und Selbstkorrektur",
+          "curriculum_sections": [
+            "E10 1.2",
+            "E10 4"
+          ],
+          "competency_goal": "Register und Verknüpfungen bewusst wählen und Fehler analysieren.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        }
+      ]
+    },
+    {
+      "id": "englisch-11",
+      "subject": "englisch",
+      "grade": 11,
+      "sources": [
+        {
+          "id": "standard",
+          "url": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/11/englisch",
+          "checked_at": "2026-10-17"
+        }
+      ],
+      "variants": [
+        "E1/E2 gemeinsam"
+      ],
+      "entry_skills": [
+        "Grundlegender Wortschatz",
+        "Einfache zusammenhängende Texte verstehen",
+        "Bekannte Zeitformen"
+      ],
+      "exercise_formats": [
+        "Reading",
+        "Listening",
+        "Writing",
+        "Speaking",
+        "Mediation",
+        "Wortschatz und Grammatik im Kontext"
+      ],
+      "topics": [
+        {
+          "id": "englisch-11-01",
+          "title": "Visions of the future",
+          "curriculum_sections": [
+            "E11 5",
+            "E11 3"
+          ],
+          "competency_goal": "Zukunftsentwürfe erschließen, vergleichen und begründet diskutieren.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R1",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "englisch-11-02",
+          "title": "Koloniales Erbe und postkoloniale Perspektiven",
+          "curriculum_sections": [
+            "E11 5",
+            "E11 2"
+          ],
+          "competency_goal": "Historische und heutige Perspektiven in Texten nachvollziehen.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "englisch-11-03",
+          "title": "Weltstädte und Globalisierung",
+          "curriculum_sections": [
+            "E11 5",
+            "E11 2"
+          ],
+          "competency_goal": "Gesellschaftliche, wirtschaftliche und ökologische Zusammenhänge erläutern.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R2",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "englisch-11-04",
+          "title": "Industrialisierung und Digitalisierung",
+          "curriculum_sections": [
+            "E11 5",
+            "E11 3"
+          ],
+          "competency_goal": "Folgen von Veränderungsprozessen anhand von Materialien diskutieren.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "englisch-11-05",
+          "title": "Literatur, Film und kritische Quellenarbeit",
+          "curriculum_sections": [
+            "E11 3",
+            "E11 4"
+          ],
+          "competency_goal": "Gestaltung und Verlässlichkeit untersuchen und Textbelege verwenden.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "englisch-11-06",
+          "title": "Lesen, Hören, Schreiben, Sprechen und Sprachmittlung",
+          "curriculum_sections": [
+            "E11 1.1"
+          ],
+          "competency_goal": "Anspruchsvollere Kommunikationsaufträge differenziert bearbeiten.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        },
+        {
+          "id": "englisch-11-07",
+          "title": "Sprachliche Mittel und Sprachreflexion",
+          "curriculum_sections": [
+            "E11 1.2",
+            "E11 4",
+            "E11 5"
+          ],
+          "competency_goal": "Präzision, Register und Varianten des Englischen reflektieren.",
+          "prerequisite_skills": [
+            "Grundlegender Wortschatz",
+            "Einfache zusammenhängende Texte verstehen",
+            "Bekannte Zeitformen"
+          ],
+          "learning_modes": [
+            "lernen",
+            "ueben",
+            "schulaufgabe"
+          ],
+          "release": "R3",
+          "status": "geplant",
+          "variant": "gemeinsam"
+        }
+      ]
+    }
+  ]
+}

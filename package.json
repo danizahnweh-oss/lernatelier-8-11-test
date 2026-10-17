@@ -1,0 +1,14 @@
+{
+  "name": "lernatelier-test",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Eigenständige Lernatelier-Testseite für Gymnasium Bayern G9",
+  "scripts": {
+    "test": "node tests/smoke.cjs",
+    "test:grading": "node --test tests/grading.test.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "^4.10.3",
+    "playwright": "^1.58.0"
+  }
+}

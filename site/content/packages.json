@@ -1,0 +1,399 @@
+{
+  "mathematik": {
+    "id": "mathe",
+    "title": "Lineare Funktionen",
+    "subtitle": "Steigung verstehen. Zusammenhänge erkennen.",
+    "symbol": "ƒ",
+    "lessons": [
+      {
+        "title": "Was bedeutet eine lineare Funktion?",
+        "body": "Eine Funktion ordnet jedem erlaubten x-Wert genau einen y-Wert zu. Bei einer linearen Funktion lautet die Gleichung `y = m · x + t`. Ihr Graph ist eine Gerade. Der Wert `t` ist der y-Achsenabschnitt, denn für `x = 0` gilt `y = t`. `m` beschreibt, um wie viel sich y ändert, wenn x um 1 größer wird.\n\nBeispiel: `f(x) = 2x + 1`. Für `x = 0, 1, 2` erhältst du `1, 3, 5`. Mit jedem Schritt nach rechts wächst der Funktionswert um 2. Die Gerade verläuft durch `(0|1)`.\n\nVerständnisfrage: Welchen Wert hat `g(0)` bei `g(x) = -3x + 4`? **Antwort: 4.** Der negative Faktor verändert diesen Startwert nicht."
+      },
+      {
+        "title": "Steigung bestimmen",
+        "body": "Die Steigung ist `m = Änderung von y / Änderung von x`. Verwende bei beiden Differenzen dieselbe Reihenfolge. Für `A(1|3)` und `B(4|9)` gilt `m = (9-3)/(4-1) = 2`. Bei einer negativen Steigung fällt die Gerade von links nach rechts. Bei `m = 0` ist sie waagrecht. Eine senkrechte Gerade hat keine Funktionsgleichung dieser Form.\n\nVerständnisfrage: y sinkt um 6, während x um 3 steigt. Wie groß ist m? **Antwort: -2.**"
+      },
+      {
+        "title": "Eine Gerade zeichnen",
+        "body": "Bei `y = -0,5x + 3` markierst du zuerst `(0|3)`. Für einen zweiten Punkt gehst du 2 nach rechts und 1 nach unten: `(2|2)`. Zeichne die Gerade durch beide Punkte. Prüfe den zweiten Punkt durch Einsetzen. Beschrifte die Achsen und beachte ihre Skalierung.\n\nVerständnisfrage: Liegt `(4|1)` auf dieser Geraden? **Antwort: ja, denn -0,5 · 4 + 3 = 1.**"
+      },
+      {
+        "title": "Aus zwei Punkten zur Gleichung",
+        "body": "Für `A(1|3)` und `B(4|9)` ist `m = 2`. Setze A in `y = 2x + t` ein: `3 = 2 · 1 + t`, also `t = 1`. Prüfe B: `2 · 4 + 1 = 9`. Die Gleichung lautet `y = 2x + 1`.\n\nVerständnisfrage: Warum reicht die Steigung allein nicht aus? **Antwort: Es gibt mehrere parallele Geraden mit derselben Steigung und unterschiedlichen Achsenabschnitten.**"
+      },
+      {
+        "title": "Ein Modell deuten",
+        "body": "Ein fiktiver Fahrradverleih verlangt 4 Euro Grundpreis und 3 Euro je gebuchter Stunde. Nur ganze Stunden werden gebucht. Das Modell lautet `K(h) = 3h + 4`, mit `h = 0, 1, 2, …`. Für 2 Stunden beträgt K 10 Euro. Im Kontext bedeutet die Steigung 3 Euro pro Stunde und der Achsenabschnitt 4 Euro Grundpreis. Zwischenwerte des Geradenmodells sind hier keine buchbaren Zeiten.\n\nVerständnisfrage: Ist das Modell proportional? **Antwort: nein, weil der Grundpreis ungleich null ist.**"
+      }
+    ],
+    "materials": "",
+    "exams": [
+      {
+        "label": "A",
+        "title": "Übungssatz A",
+        "assignment": "1. Gegeben ist `f(x)=-2x+6`. Nenne m und t, berechne f(3) und erkläre das Vorzeichen der Steigung. **4 Punkte**\n2. Zeichne f für `-1 ≤ x ≤ 4`. Beschrifte die Achsen und markiere die Schnittpunkte mit beiden Achsen. **4 Punkte**\n3. Eine Gerade geht durch `A(1|1)` und `B(4|7)`. Bestimme ihre Gleichung und prüfe beide Punkte. **6 Punkte**\n4. Ein fiktiver Kopierservice berechnet für einen Auftrag 3 Euro Vorbereitung und 0,5 Euro je gedrucktem Plakat. Stelle K(n) auf, berechne den Preis für 10 Plakate und bestimme die Anzahl bei 13 Euro. Erkläre, ob das Modell proportional ist. **6 Punkte**",
+        "answer": "| Aufgabe | Lösung | Punkte |\n|---|---|---|\n| 1 | m=-2; t=6; f(3)=0; fallende Gerade, weil y pro x-Schritt um 2 sinkt | je 1, zusammen 4 |\n| 2 | Achsen und passende Skalierung; `(0|6)`; `(3|0)`; passende Gerade im angegebenen Bereich | je 1, zusammen 4 |\n| 3 | Differenzenansatz 1; m=2 mit Rechnung 1; Ansatz `1=2·1+t` 1; t=-1 und Gleichung `y=2x-1` 1; Prüfung A 1 und B 1 | 6 |\n| 4 | `K(n)=0,5n+3` 2; K(10)=8 Euro 1; `0,5n+3=13` 1; n=20 1; nicht proportional wegen Grundpreis 1 | 6 |"
+      },
+      {
+        "label": "B",
+        "title": "Übungssatz B",
+        "assignment": "1. Gegeben ist `g(x)=0,5x-2`. Bestimme g(-2) und g(4), nenne den Achsenabschnitt und erkläre die Steigung. **4 Punkte**\n2. Zeichne g anhand zweier geeigneter Punkte. Eine Schülerin behauptet, `(2|0)` liege auf g. Prüfe die Aussage rechnerisch. **4 Punkte**\n3. Bestimme die Gleichung der Geraden durch `C(-2|5)` und `D(2|-3)`. Prüfe beide Punkte. **6 Punkte**\n4. Ein fiktives Wasserbecken enthält 50 Liter. Gleichmäßig fließen 5 Liter pro Minute ab, bis es leer ist. Stelle V(t) auf, bestimme V(6) und den Leerungszeitpunkt. Gib den sinnvollen Zeitbereich an. **6 Punkte**",
+        "answer": "| Aufgabe | Lösung | Punkte |\n|---|---|---|\n| 1 | g(-2)=-3; g(4)=0; Achsenabschnitt -2; y wächst um 0,5 pro x-Schritt | je 1, zusammen 4 |\n| 2 | Zwei passende Punkte und Gerade, etwa `(0|-2)` und `(4|0)` 2; g(2)=-1 1; Aussage falsch 1 | 4 |\n| 3 | Differenzenansatz 1; m=-2 mit Rechnung 1; Ansatz `5=(-2)·(-2)+t` 1; t=1 und `y=-2x+1` 1; Prüfung C 1 und D 1 | 6 |\n| 4 | `V(t)=50-5t` 2; V(6)=20 Liter 1; Ansatz V(t)=0 1; leer nach 10 Minuten 1; `0≤t≤10` 1 | 6 |\n\nAlternative korrekte Wege sind gleichwertig. Bei einem Folgefehler werden danach korrekt ausgeführte Schritte weiter gewertet; derselbe Fehler wird nicht erneut abgezogen. Skizzen werden nicht anhand identischer Pixelpositionen bewertet, sondern nach Skalierung, Punkten und Verlauf."
+      }
+    ],
+    "source": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/8/mathematik",
+    "document": "content/mathe-8-lineare-funktionen.md",
+    "exercises": [
+      {
+        "id": "m1",
+        "title": "Steigung erkennen",
+        "prompt": "Welche Steigung hat f(x) = 3x − 2? Gib nur die Zahl an.",
+        "hints": [
+          "Vergleiche mit f(x) = mx + t.",
+          "Die Steigung ist der Faktor vor x."
+        ],
+        "answer": "Die Steigung m ist 3. Pro Schritt nach rechts wächst y um 3.",
+        "kind": "number",
+        "expected": 3,
+        "tolerance": 0
+      },
+      {
+        "id": "m2",
+        "title": "Mit Vorzeichen rechnen",
+        "prompt": "Berechne f(−1) für f(x) = −2x + 5.",
+        "hints": [
+          "Setze −1 mit Klammern ein.",
+          "Rechne −2 · (−1) + 5."
+        ],
+        "answer": "f(−1) = 7. Das Produkt aus zwei negativen Zahlen ist positiv.",
+        "kind": "number",
+        "expected": 7,
+        "tolerance": 0
+      },
+      {
+        "id": "m3",
+        "title": "Aus zwei Punkten",
+        "prompt": "Bestimme die Steigung durch A(−1|4) und B(3|−4).",
+        "hints": [
+          "Berechne Änderung von y geteilt durch Änderung von x.",
+          "Verwende bei beiden Differenzen dieselbe Punktreihenfolge."
+        ],
+        "answer": "m = (−4 − 4) / (3 − (−1)) = −8 / 4 = −2.",
+        "kind": "number",
+        "expected": -2,
+        "tolerance": 0
+      },
+      {
+        "id": "m4",
+        "title": "Geraden zeichnen",
+        "prompt": "Zeichne y = 0,5x − 1 auf Papier. Beschreibe zwei Punkte und dein Vorgehen.",
+        "hints": [
+          "Beginne am y-Achsenabschnitt.",
+          "Gehe 2 nach rechts und 1 nach oben."
+        ],
+        "answer": "Zum Beispiel (0|−1) und (2|0). Zeichne die Gerade durch beide Punkte und prüfe sie durch Einsetzen.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      },
+      {
+        "id": "m5",
+        "title": "Eine Gleichung bestimmen",
+        "prompt": "Bestimme die Gleichung durch A(2|1) und B(6|9). Beschreibe deinen Rechenweg.",
+        "hints": [
+          "Bestimme zuerst die Steigung.",
+          "Setze danach einen Punkt in y = mx + t ein."
+        ],
+        "answer": "m = (9−1)/(6−2) = 2. Aus 1 = 2·2 + t folgt t = −3. Also y = 2x − 3. Beide Punkte passen.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      },
+      {
+        "id": "m6",
+        "title": "Eine Punktprobe",
+        "prompt": "P(3|8) soll auf f(x) = 2x + 1 liegen. Berechne f(3).",
+        "hints": [
+          "Setze den x-Wert des Punktes ein.",
+          "Rechne 2 · 3 + 1."
+        ],
+        "answer": "f(3) = 7. P liegt deshalb nicht auf der Geraden, sondern eine Einheit darüber.",
+        "kind": "number",
+        "expected": 7,
+        "tolerance": 0
+      },
+      {
+        "id": "m7",
+        "title": "Einen Denkfehler finden",
+        "prompt": "„Bei y = 2x + 3 steigt die Gerade pro Schritt um 3.“ Verbessere die Erklärung.",
+        "hints": [
+          "Unterscheide Startwert und Änderung.",
+          "Vergleiche f(0) mit f(1)."
+        ],
+        "answer": "3 ist der y-Achsenabschnitt. Die Steigung ist 2: f(0) = 3 und f(1) = 5 unterscheiden sich um 2.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      },
+      {
+        "id": "m8",
+        "title": "Ein Modell anwenden",
+        "prompt": "Ein fiktiver Tarif kostet 6 € Grundpreis und 2 € pro Nutzung. Wie viele Nutzungen ergeben 20 €?",
+        "hints": [
+          "Stelle K(n) = 2n + 6 auf.",
+          "Löse 2n + 6 = 20."
+        ],
+        "answer": "2n + 6 = 20 ergibt n = 7 Nutzungen.",
+        "kind": "number",
+        "expected": 7,
+        "tolerance": 0
+      }
+    ]
+  },
+  "deutsch": {
+    "id": "deutsch",
+    "title": "Linear argumentieren",
+    "subtitle": "Deinen Standpunkt klar und überzeugend begründen.",
+    "symbol": "Aa",
+    "lessons": [
+      {
+        "title": "Die Schreibsituation klären",
+        "body": "Frage dich: Wem schreibe ich? Wozu schreibe ich? Welche Entscheidung soll nachvollziehbar werden? Eine Nachricht an die Schülervertretung braucht eine direkte, sachliche Ansprache und passende Beispiele aus dem Schulalltag.\n\nBeispielauftrag: „Begründe gegenüber der Schülervertretung, warum ein freiwilliger Lesetreff eingerichtet werden sollte.“ Eine Zusammenfassung darüber, was ein Lesetreff ist, erfüllt diesen Auftrag allein noch nicht.\n\nVerständnisfrage: Was muss der Text leisten? **Antwort: Die Einrichtung begründen, sodass die angesprochenen Mitschüler die Position nachvollziehen können.**"
+      },
+      {
+        "title": "Behauptung, Begründung und Beispiel verbinden",
+        "body": "Behauptung: „Ein freiwilliger Lesetreff kann die Auswahl neuer Bücher erleichtern.“ Begründung: „Dort können Jugendliche erfahren, welche Bücher Gleichaltrigen gefallen und warum.“ Beispiel: „Wer eine spannende Geschichte sucht, könnte durch eine kurze Buchvorstellung einen passenden Titel entdecken.“\n\nDas Beispiel macht die Begründung anschaulich. Es ist keine statistische Untersuchung und darf nicht als wissenschaftlicher Beweis ausgegeben werden. Formuliere Möglichkeiten als Möglichkeiten.\n\nVerständnisfrage: Was fehlt in „Ein Lesetreff ist gut, weil er gut ist“? **Antwort: Ein eigenständiger Grund; der Satz wiederholt nur die Behauptung.**"
+      },
+      {
+        "title": "Linear aufbauen",
+        "body": "Du entwickelst eine Position in einer nachvollziehbaren Folge. Die Einleitung stellt die Frage vor. Im Hauptteil erhält jedes Argument einen eigenen Absatz. Am Schluss formulierst du eine Folgerung oder einen Vorschlag, der sich aus den Argumenten ergibt. Zwei tatsächlich unterschiedliche und ausgeführte Argumente sind hilfreicher als vier Wiederholungen.\n\nGeeignete Verknüpfungen: „Ein erster Grund ist …“, „Hinzu kommt …“, „Besonders wichtig ist …“, „Daraus folgt …“. Sie helfen nur dann, wenn auch der gedankliche Zusammenhang stimmt.\n\nVerständnisfrage: Muss jeder Text genau mit diesen Formulierungen beginnen? **Antwort: nein, andere passende Verknüpfungen sind gleichwertig.**"
+      },
+      {
+        "title": "Material verwenden und überarbeiten",
+        "body": "Entnimm einem Material nur, was es tatsächlich aussagt. Eine Meinung aus einer Klasse gilt nicht automatisch für alle Jugendlichen. Kennzeichne, ob du dich auf Material, ein eigenes Beispiel oder eine Vermutung beziehst.\n\nÜberarbeite zuerst den Gedanken: Ist mein Standpunkt klar? Trägt jede Begründung? Passt das Beispiel? Danach prüfst du Übergänge, Wortwahl, Satzbau und Schreibweisen. Eine sprachliche Korrektur ersetzt keine fehlende Begründung."
+      }
+    ],
+    "materials": "",
+    "exams": [
+      {
+        "label": "A",
+        "title": "Schreibauftrag A Ein ruhiger Pausenraum",
+        "assignment": "Eine fiktive Schule überlegt, einen Raum in der Mittagspause als freiwilligen ruhigen Aufenthaltsort zu öffnen.\n\nMaterial A1: Der Raum bietet 18 Sitzplätze. Essen und Gespräche in normaler Lautstärke sind auf dem Schulhof weiterhin möglich. Für den ruhigen Raum müsste eine Aufsicht organisiert werden.\n\nMaterial A2: In einer erfundenen Rückmeldung sagen drei Jugendliche: „Nach einem lauten Vormittag wäre ein ruhiger Platz angenehm.“ „Ich möchte in der Pause mit meinen Freunden sprechen.“ „Ich würde den Raum nur an manchen Tagen nutzen.“ Diese Einzelstimmen sind keine repräsentative Umfrage.\n\nAuftrag: Schreibe an die Schülervertretung eine zusammenhängende Stellungnahme. Entscheide dich für oder gegen die Einrichtung des Raums und entwickle deine Position mit mindestens zwei unterschiedlichen Argumenten und passenden Beispielen. Beziehe Informationen aus dem Material ein und schließe mit einem begründeten Vorschlag. Eine systematische Gegenüberstellung beider Positionen wird nicht verlangt.",
+        "answer": "Für die Einrichtung können Entlastung durch einen ruhigeren Ort, freiwillige Wahlmöglichkeiten und zeitweise Nutzung sprechen. Gegen die Einrichtung können im Material genannte räumliche Grenzen oder die notwendige Organisation der Aufsicht ausgeführt werden. Die Qualität der Begründung entscheidet, nicht die gewählte Position. Einzelstimmen dürfen nicht zu einer Mehrheit umgedeutet werden.\n\nMögliche Modelllösung für die Einrichtung:\n\n> Liebe Schülervertretung, unsere Pausen sollten unterschiedliche Bedürfnisse berücksichtigen. Deshalb unterstütze ich den Vorschlag, einen freiwilligen ruhigen Aufenthaltsraum einzurichten.\n>\n> Ein erster Grund ist, dass manche Jugendliche nach mehreren Unterrichtsstunden eine ruhigere Umgebung suchen. Eine Stimme aus dem Material beschreibt genau dieses Bedürfnis. Wer einen anstrengenden Vormittag hatte, könnte dort beispielsweise einige Minuten lesen, ohne sich am Gespräch auf dem Schulhof beteiligen zu müssen. Der Raum wäre damit eine zusätzliche Möglichkeit, die Pause zu gestalten.\n>\n> Hinzu kommt, dass die freiwillige Nutzung eine persönliche Entscheidung erlaubt. Die Jugendlichen müssten sich nicht dauerhaft für eine bestimmte Pausenform festlegen. Das zeigt die Aussage, den Raum nur an manchen Tagen nutzen zu wollen. Beispielsweise könnte jemand montags draußen mit Freunden sprechen und mittwochs einen ruhigeren Platz wählen. Gespräche auf dem Schulhof blieben weiterhin möglich.\n>\n> Der Raum sollte deshalb zunächst probeweise geöffnet werden. Vorher muss geklärt werden, wie die Aufsicht organisiert wird und wie bei mehr als 18 Interessierten eine faire Nutzung möglich ist. Nach einigen Wochen könnte die Schülervertretung Rückmeldungen sammeln. So ließe sich prüfen, ob das Angebot den unterschiedlichen Bedürfnissen tatsächlich hilft."
+      },
+      {
+        "label": "B",
+        "title": "Schreibauftrag B Ein wöchentlicher Büchertausch",
+        "assignment": "Eine fiktive Schulbibliothek möchte einmal pro Woche einen freiwilligen Büchertausch anbieten.\n\nMaterial B1: Getauscht werden eigene Bücher. Für jedes mitgebrachte Buch darf ein anderes ausgewählt werden, wenn ein passendes vorhanden ist. Es gibt keine Garantie auf einen bestimmten Titel. Name und Telefonnummer müssen nicht im Buch stehen.\n\nMaterial B2: In einer erfundenen Besprechung werden folgende Punkte genannt: „Ein gelesenes Buch könnte jemand anderem gefallen.“ „Die Organisation braucht feste Regeln.“ „Beschädigte Bücher sollten nicht weitergegeben werden.“ Es liegen keine Angaben über Kosten oder die Zahl möglicher Teilnehmer vor.\n\nAuftrag: Schreibe für die Schulhomepage eine Stellungnahme für oder gegen den Büchertausch. Entwickle mindestens zwei unterschiedliche Argumente, verwende geeignete Informationen aus dem Material und formuliere einen abschließenden Vorschlag. Wähle eine sachliche Ansprache für die Schulgemeinschaft.",
+        "answer": "Mögliche Gründe für das Angebot: weitere Nutzung bereits gelesener Bücher; Zugang zu neuen Leseideen durch den Austausch. Mögliche Gründe gegen die konkrete Ausgestaltung: fehlende Garantie eines passenden Tauschtitels oder ungeklärte Organisation. Behauptete Einsparungen sind nur als nachvollziehbare Möglichkeit zulässig, nicht als erfundene gemessene Zahl.\n\nMögliche Modelllösung für einen geregelten Versuch:\n\n> Ein freiwilliger Büchertausch könnte unsere Schulbibliothek sinnvoll ergänzen. Ich spreche mich dafür aus, das Angebot zunächst mit klaren Regeln zu erproben.\n>\n> Ein wichtiger Grund ist, dass bereits gelesene Bücher weiter genutzt werden können. Nicht jedes eigene Buch wird später noch einmal gelesen. Beim Tausch könnte eine Geschichte, die zu Hause im Regal steht, eine neue Leserin finden. Wer etwa einen Jugendroman mitbringt, könnte damit jemandem eine Freude machen, der diese Geschichte noch nicht kennt.\n>\n> Außerdem kann der Austausch neue Leseideen eröffnen. Die angebotenen Bücher wurden von anderen Jugendlichen ausgewählt und mitgebracht. So entdeckt jemand möglicherweise einen Titel, den er sonst nicht gesucht hätte. Eine kurze, freiwillige Empfehlung beim Tauschen könnte erklären, warum sich die Lektüre lohnt. Dass kein bestimmter Titel garantiert ist, sollte dabei von Anfang an klar sein.\n>\n> Ich schlage deshalb einen Probemonat vor. Vorher sollten die Verantwortlichen festlegen, in welchem Zustand Bücher angenommen werden und wie der Tausch abläuft. Beschädigte Bücher könnten zurückgewiesen werden. Nach dem Versuch lässt sich gemeinsam prüfen, ob das Angebot genutzt wird und die Regeln verständlich sind. Erst dann sollte über eine dauerhafte Fortsetzung entschieden werden."
+      }
+    ],
+    "source": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/8/deutsch",
+    "document": "content/deutsch-8-linear-argumentieren.md",
+    "exercises": [
+      {
+        "id": "d1",
+        "title": "Argumente erkennen",
+        "prompt": "„Ein Lesetreff sollte freiwillig sein. So nehmen Jugendliche aus eigenem Interesse teil. Beispielsweise könnte jemand kommen, der gerade ein Buch empfehlen möchte.“ Ordne Behauptung, Begründung und Beispiel zu.",
+        "hints": [
+          "Frage nach der Funktion jedes Satzes.",
+          "Der erste Satz nennt eine Position."
+        ],
+        "answer": "Satz 1: Behauptung. Satz 2: Begründung. Satz 3: Beispiel.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      },
+      {
+        "id": "d2",
+        "title": "Eine Begründung finden",
+        "prompt": "Ergänze: „Der Treff sollte in einer längeren Pause stattfinden, weil …“",
+        "hints": [
+          "Denke an die Teilnahme.",
+          "Welche Verpflichtungen haben manche nach Schulschluss?"
+        ],
+        "answer": "Zum Beispiel: „… dann auch Jugendliche teilnehmen könnten, die nachmittags feste Termine haben.“ Andere passende Gründe sind möglich.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      },
+      {
+        "id": "d3",
+        "title": "Passende Beispiele",
+        "prompt": "Ein ruhiger Leseplatz erleichtert ungestörtes Lesen. A: Jemand liest dort, während der Flur laut ist. B: Jemand kauft am Wochenende ein Fahrrad. Welches Beispiel passt? Begründe.",
+        "hints": [
+          "Welches Beispiel zeigt den behaupteten Vorteil?",
+          "Suche den Zusammenhang mit Ruhe und Lesen."
+        ],
+        "answer": "A passt, weil die ruhige Umgebung das Lesen trotz Lärm außerhalb ermöglicht. B stellt diesen Zusammenhang nicht her.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      },
+      {
+        "id": "d4",
+        "title": "Den Text planen",
+        "prompt": "Plane eine Stellungnahme für einen freiwilligen Lesetreff: Einleitung, zwei unterschiedliche Argumente und Schluss.",
+        "hints": [
+          "Unterscheide etwa Buchauswahl und Austausch.",
+          "Notiere zu jedem Argument einen Grund und ein Beispiel."
+        ],
+        "answer": "Mögliche Gliederung: Anlass; neue Bücher durch Empfehlungen finden; Leseeindrücke mit anderen teilen; freiwilligen Probemonat vorschlagen.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      },
+      {
+        "id": "d5",
+        "title": "Genauer formulieren",
+        "prompt": "Überarbeite: „Alle Schüler lesen dann jeden Tag und bekommen sicher bessere Noten.“",
+        "hints": [
+          "Welche Aussagen sind zu pauschal?",
+          "Formuliere eine begründete Möglichkeit statt einer Garantie."
+        ],
+        "answer": "„Der Treff könnte einige Jugendliche dazu anregen, häufiger zu lesen, weil sie dort passende Buchempfehlungen erhalten.“ Eine Notenverbesserung ist nicht belegt.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      },
+      {
+        "id": "d6",
+        "title": "Einen Absatz schreiben",
+        "prompt": "Schreibe ein eigenes Argument für oder gegen einen Lesetreff. Ergänze Begründung und Beispiel.",
+        "hints": [
+          "Beginne mit einer konkreten Wirkung.",
+          "Prüfe, ob das Beispiel genau diese Wirkung zeigt."
+        ],
+        "answer": "Beispiel: „Ein Lesetreff kann den Austausch zwischen Klassen fördern. Dort begegnen Jugendliche anderen mit ähnlichen Leseinteressen. So könnten Schüler aus der 8a und 8c gemeinsam eine Geschichte empfehlen.“ Andere Positionen sind gleichwertig.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      }
+    ]
+  },
+  "englisch": {
+    "id": "englisch",
+    "title": "A day in London",
+    "subtitle": "Eine Stadt entdecken. Auf Englisch ins Gespräch kommen.",
+    "symbol": "En",
+    "lessons": [
+      {
+        "title": "Erst den Überblick gewinnen",
+        "body": "Lies Überschrift, Anfang und Schluss. Frage: Who is speaking? What is the text about? What does the person want? Bei einer Detailfrage suchst du anschließend gezielt die passende Textstelle. Nicht jedes unbekannte Wort muss übersetzt werden.\n\nBeispiel: “Maya suggests meeting in the afternoon because her cousin is busy in the morning.” Hauptaussage: Maya schlägt ein Treffen vor. Detail: nachmittags, weil ihr Cousin vormittags beschäftigt ist.\n\nVerständnisfrage: Welche Textstelle begründet die Uhrzeit? **Antwort: “because her cousin is busy in the morning”.**"
+      },
+      {
+        "title": "Beim Hören gezielt notieren",
+        "body": "Vor dem Hören liest du die Fragen. Beim ersten Hören sammelst du den Überblick, beim zweiten prüfst du Details. Notiere Schlüsselwörter statt vollständiger Sätze. Wenn eine Information korrigiert wird, zählt die zuletzt ausdrücklich gültige Angabe.\n\nVerständnisfrage: “We first planned to meet at ten, but the new meeting time is half past ten.” Wann findet das Treffen statt? **Antwort: 10:30.**"
+      },
+      {
+        "title": "Vorschläge begründen und reagieren",
+        "body": "Useful language: “We could …”, “I would prefer … because …”, “What do you think?”, “That sounds interesting, but …”, “Could you explain …?” Eine sinnvolle Reaktion greift den Vorschlag der anderen Person auf.\n\nWortfeld: neighbourhood, meeting point, crowded, quiet, local, exhibition, route, to recommend. Im Kontext erklären: “crowded” bedeutet, dass viele Menschen an einem Ort sind; “local” bezieht sich auf die nähere Umgebung.\n\nVerständnisfrage: Welche Antwort führt ein Gespräch weiter? A: “No.” B: “I would prefer the park because we can talk there. What do you think?” **Antwort: B, mit nachvollziehbarem Grund und Rückfrage.**"
+      },
+      {
+        "title": "Schreiben und Sprachmittlung unterscheiden",
+        "body": "Eine eigene Nachricht ordnest du nach Anlass, wichtigen Informationen und Schluss. Bei der Sprachmittlung wählst du die Informationen aus, die dein Adressat braucht. Du übersetzt nicht jeden Satz. Namen, Zahlen und Regeln müssen korrekt bleiben.\n\nBeispiel: Für einen Freund, der zu einem Workshop kommt, sind Treffpunkt, Zeit und benötigte Gegenstände relevant. Eine interne Bemerkung über die Organisation der Aufsicht braucht er nicht automatisch."
+      },
+      {
+        "title": "Sprache im Kontext prüfen",
+        "body": "Prüfe die Zeitperspektive deiner Aussage: “Yesterday we visited …” beschreibt Vergangenes; “We could visit … tomorrow” ist ein Vorschlag. Verbinde Grund und Vorschlag mit “because”. Wiederholung bekannter Zeitformen und Satzmuster wird auf den persönlichen Bedarf abgestimmt, nicht als starre neue Grammatikliste aus dem Thema abgeleitet."
+      }
+    ],
+    "materials": "### R1 A Saturday in Maya’s neighbourhood\n\n> My name is Maya, and I live in London. When my cousin Ben visits, he usually asks to see famous places. This Saturday I want to show him something different: the neighbourhood where I spend my free time.\n>\n> We plan to meet outside the library at half past ten. First, we will visit a small community exhibition. Local teenagers have taken photographs of streets, shops and parks that are important to them. Each photograph has a short explanation. I would like Ben to see my friend’s picture of a busy bus stop. It shows how many different people use the same space every day.\n>\n> After the exhibition, we could walk to the park. Ben enjoys drawing, so he could sketch while I read. If it rains, we will stay in the library and look at the photographs again. We do not need to buy anything for our plan.\n>\n> For me, showing a visitor around is not just about famous buildings. It is also about sharing ordinary places and explaining why they matter to the people who live there.\n\n### H1 A message from the project leader\n\nHörskript, eine Stimme, klare britische Standardaussprache ohne künstlich übertriebene Pausen. Zweimal abspielen; zwischen den Durchgängen etwa 30 Sekunden Bearbeitungszeit. Tempo und Aussprache sind vor Freigabe auf Angemessenheit zu prüfen.\n\n> Hello everyone. Here is some information about our London photography project on Saturday. Please meet outside the library at ten thirty. Our first message said ten o’clock, but the exhibition opens later, so ten thirty is the new time. Bring a pencil and a notebook. You do not need a camera because we will look at photographs that local teenagers have already taken. In pairs, choose one photograph and discuss what it tells you about the neighbourhood. At twelve, we will meet again inside the library, next to the information desk. Please do not wait at the entrance. If you arrive late, ask a member of staff to show you the exhibition room. Finally, remember that the people in the photographs have agreed to take part in this fictional school project. Do not take or share new photographs of visitors without asking them.\n\n### R2 A different way to explore the city\n\n> When Leo’s class planned a London project, some students wanted to make a list of famous buildings. Their teacher suggested another question: How do people use the city in their everyday lives?\n>\n> Leo and his friend Aisha decided to study a small public square. They visited it once in the morning and again after school. In the morning, people walked quickly across it on their way to work. Later, some people sat on the benches, and children played nearby. The same place seemed different at another time of day.\n>\n> The students drew a map and wrote down what they noticed. They did not record people’s names or take pictures of their faces. Aisha said that one visit could not show everything about the square. Rain, school holidays or a special event might change what happened there.\n>\n> For their presentation, they chose two drawings and explained the differences. Leo still enjoyed looking at famous buildings, but the project helped him notice places that he had previously walked past without thinking about them.\n\n### H2 A message about the presentation\n\nHörskript, eine Stimme; dieselben Abspielbedingungen wie H1.\n\n> Hi everyone. This is a message about our city project presentation on Thursday. We will start at two fifteen in Room Six. Room Four is being used by another group, so please go straight to Room Six. Bring your drawings and your notes. Each pair has four minutes to present, followed by two minutes for questions. You do not need to prepare a video. We want to hear what you observed and how you reached your conclusions. Please explain one limitation of your project as well. For example, perhaps you only visited your chosen place once. Parents cannot attend this session, but another class will join us. If your partner is absent, speak to me before the session begins so that we can change the plan together. There is no need to start again or make a new project on your own.",
+    "exams": [
+      {
+        "label": "A",
+        "title": "Übungssatz A",
+        "assignment": "**Reading, R1, 6 Punkte.** Answer in your own words where possible.\n\n1. What does Maya want to show Ben, and why? 2 Punkte.\n2. What is special about her friend’s photograph, and what does it show? 2 Punkte.\n3. What will they do if it rains, and what does Maya’s final paragraph say about showing visitors around? 2 Punkte.\n\n**Listening, H1, 6 Punkte.** Die folgenden Fragen stehen vor dem ersten Hören bereit.\n\n1. What is the final meeting time, and why has it changed? 2 Punkte.\n2. Name the two things students should bring. 2 Punkte.\n3. Where should students meet again at twelve, and where should they not wait? 2 Punkte.\n\n**Writing, 10 Punkte.** Write an email to a visiting student. Suggest an afternoon activity based on the fictional project, explain two reasons for your suggestion and ask a relevant question. About 100–140 words.\n\n**Mediation, 8 Punkte.** Your English-speaking friend wants to join a fictional drawing workshop. Send a short English message with the information they need: „Der Workshop findet am Samstag von 14 bis 16 Uhr im Raum 5 statt. Bring einen Bleistift mit. Melde dich bis Donnerstag an. Für die interne Raumplanung wird eine Liste geführt.“",
+        "answer": "Reading: 1: neighbourhood/everyday places 1, personal/local meaning 1. 2: friend’s picture of bus stop 1, different people sharing space 1. 3: stay in library/look at photographs 1, visits also concern ordinary places and their meaning 1.\n\nListening: 1: 10:30 1, exhibition opens later 1. 2: pencil 1, notebook 1. 3: inside library next to information desk 1, not at entrance 1.\n\nWriting: activity and two reasons, question and email conventions; bewertet mit der Rubrik unten. Das Beispiel zu U3 illustriert den Aufbau, wird in der Simulation nicht vorab gezeigt.\n\nMediation, vier Inhaltseinheiten zu je 1 Punkt: Saturday; 2–4 pm; Room 5; bring pencil and sign up by Thursday (diese letzte Einheit je 0,5). Dazu Adressatenbezug 2 und sprachliche Verständlichkeit 2. Die interne Raumplanung muss nicht übertragen werden. Muster: “Hi! The drawing workshop is on Saturday from 2 to 4 pm in Room 5. Please bring a pencil and sign up by Thursday.”"
+      },
+      {
+        "label": "B",
+        "title": "Übungssatz B",
+        "assignment": "**Reading, R2, 6 Punkte.**\n\n1. How does the use of the square differ between the two visits? Give one detail for each visit. 2 Punkte.\n2. How did the students record their observations, and what personal information did they avoid collecting? 2 Punkte.\n3. Explain one limitation of the project and one thing Leo learned. 2 Punkte.\n\n**Listening, H2, 6 Punkte.**\n\n1. Give the starting time and the correct room. 2 Punkte.\n2. How much time does each pair have for presenting and for questions? 2 Punkte.\n3. Who will join the session, and what should you do if your partner is absent? 2 Punkte.\n\n**Writing, 10 Punkte.** Write a short post for your school website proposing a project about an everyday place. Explain what you would observe, give two reasons for choosing the place and describe one limitation. About 100–140 words.\n\n**Mediation, 8 Punkte.** Tell an English-speaking project partner what they need to know: „Wir treffen uns am Freitag um 15 Uhr vor dem Gemeindezentrum. Bring deine Zeichnungen mit. Bei Regen gehen wir in Raum 2. Die Lehrkraft informiert die Hausverwaltung gesondert.“",
+        "answer": "Reading: 1: people cross on way to work 1, later sitting/children playing 1. 2: map and notes 1, no names or face photographs 1. 3: limited visits/weather or events may change findings 1, Leo notices ordinary places/their use 1.\n\nListening: 1: 2:15 pm 1, Room 6 1. 2: four minutes presentation 1, two minutes questions 1. 3: another class 1, tell teacher before session 1.\n\nWriting: everyday place, observation plan, two reasons and limitation; bewertet mit der Rubrik unten. Mögliches Gerüst: “Our group could observe … We chose it because … Another reason is … We would record … Our results would be limited because …”. Eine bloße unveränderte Übernahme dieses Gerüsts erfüllt die Aufgabe nicht.\n\nMediation, vier Inhaltseinheiten zu je 1 Punkt: Friday at 3 pm; outside community centre; bring drawings; Room 2 if it rains. Dazu Adressatenbezug 2 und Verständlichkeit 2. Muster: “Let’s meet on Friday at 3 pm outside the community centre. Please bring your drawings. If it rains, we will go to Room 2.” Keine interne Nachricht an die Hausverwaltung nötig."
+      }
+    ],
+    "source": "https://www.lehrplanplus.bayern.de/fachlehrplan/gymnasium/8/englisch/1-fremdsprache",
+    "document": "content/englisch-8-london.md",
+    "exercises": [
+      {
+        "id": "e1",
+        "title": "Reading",
+        "prompt": "Lies R1 unter „Materialien“. Why does Maya choose her neighbourhood? Give one supporting detail.",
+        "hints": [
+          "Read the beginning and the final paragraph.",
+          "What do ordinary places mean to Maya?"
+        ],
+        "answer": "She wants to show everyday places and explain why they matter. A supporting detail is the exhibition by local teenagers or her own free-time places.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      },
+      {
+        "id": "e2",
+        "title": "Listening",
+        "prompt": "Höre H1 unter „Materialien“, ohne das Skript zu lesen. Note the final meeting time, two things to bring and the meeting place at twelve.",
+        "hints": [
+          "Listen for time, objects and place.",
+          "The first meeting time is corrected."
+        ],
+        "answer": "10:30; a pencil and a notebook; inside the library next to the information desk.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      },
+      {
+        "id": "e3",
+        "title": "Writing",
+        "prompt": "Write an email to Ben suggesting an afternoon activity. Give two reasons and ask one question. About 80–120 words.",
+        "hints": [
+          "Plan: greeting, suggestion, reasons, question, ending.",
+          "Try “We could … because …”."
+        ],
+        "answer": "Check: Is there a clear activity? Are there two different reasons? Can Ben answer your question? Does it read like an email? Different suggestions are welcome.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      },
+      {
+        "id": "e4",
+        "title": "Speaking",
+        "prompt": "Choose between the exhibition and the park. Suggest an activity, give a reason and react to a different idea. Speak for about one minute.",
+        "hints": [
+          "You can prepare a few keywords.",
+          "Try “I would prefer … because … What do you think?”."
+        ],
+        "answer": "Self-check: Did you make a clear suggestion, give a reason and react to the other idea? Understandable speech matters; no particular accent is required.",
+        "kind": "speaking",
+        "expected": null,
+        "tolerance": 0
+      },
+      {
+        "id": "e5",
+        "title": "Mediation",
+        "prompt": "Inform Ben in English: „Der erfundene Schulworkshop beginnt um 14 Uhr im Raum 3. Bring Papier mit. Melde dich bis Freitag an. Die Lehrkraft klärt die Aufsicht intern.“",
+        "hints": [
+          "Choose what Ben needs to know.",
+          "Include time, room, material and registration."
+        ],
+        "answer": "“The workshop starts at 2 pm in Room 3. Please bring paper and sign up by Friday.” The internal supervision arrangements are not needed.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      },
+      {
+        "id": "e6",
+        "title": "Language in context",
+        "prompt": "Complete: “Yesterday we ___ (visit) the exhibition. Tomorrow we could ___ (go) to the park because it ___ (be) quiet there.”",
+        "hints": [
+          "Distinguish past event, suggestion and description.",
+          "After could, use the base form."
+        ],
+        "answer": "visited, go, is. Explain each choice and compare it with your answer.",
+        "kind": "text",
+        "expected": null,
+        "tolerance": 0
+      }
+    ]
+  }
+}

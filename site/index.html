@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f5f7f8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Eigenständige Testseite für Mathematik, Deutsch und Englisch am Gymnasium Bayern. Lernen, üben und Schulaufgaben vorbereiten.">
+  <title>Lernatelier | Dein Lernbereich für Klasse 8 bis 11</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="assets/marked.min.js" defer></script>
+  <script src="assets/purify.min.js" defer></script>
+  <script src="ai.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Zum Lerninhalt</a>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Lernatelier Startseite"><span class="brand-mark" aria-hidden="true">la<span>↗</span></span><span>Lernatelier</span></a>
+    <span class="test-label">Testseite mit KI-Bewertung</span>
+    <button class="button ghost small" id="help-open">So funktioniert’s</button>
+  </header>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Lernbereich wählen">
+      <div class="profile"><span class="profile-icon" aria-hidden="true">↗</span><div><strong>Dein Lernbereich</strong><span>Gymnasium Bayern G9</span></div></div>
+      <label class="field-label" for="grade">Deine Jahrgangsstufe</label>
+      <select id="grade"><option value="8">Klasse 8</option><option value="9">Klasse 9</option><option value="10">Klasse 10</option><option value="11">Klasse 11</option></select>
+      <nav class="subject-nav" aria-label="Fach wählen">
+        <button data-subject="mathematik" aria-pressed="true"><span class="subject-symbol" aria-hidden="true">ƒ</span>Mathematik<span class="nav-arrow" aria-hidden="true">↗</span></button>
+        <button data-subject="deutsch" aria-pressed="false"><span class="subject-symbol" aria-hidden="true">Aa</span>Deutsch<span class="nav-arrow" aria-hidden="true">↗</span></button>
+        <button data-subject="englisch" aria-pressed="false"><span class="subject-symbol" aria-hidden="true">En</span>Englisch<span class="nav-arrow" aria-hidden="true">↗</span></button>
+      </nav>
+      <div id="variant-field" hidden><label class="field-label" for="variant">Englisch ist deine …</label><select id="variant"><option value="E1">erste Fremdsprache</option><option value="E2">zweite Fremdsprache</option></select></div>
+      <div class="sidebar-note"><span class="note-icon" aria-hidden="true">↳</span><strong>Dein Tempo. Dein Weg.</strong><p>Du kannst jederzeit zwischen Lernen, Üben und Schulaufgabe wechseln.</p></div>
+      <div class="sidebar-bottom"><span class="save-state" id="save-state">Nur in diesem Browser gespeichert</span><button class="text-button" id="export">Lernstand herunterladen ↗</button><button class="text-button muted" id="reset-open">Lernstand zurücksetzen</button></div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div class="breadcrumb" id="breadcrumb">Dein Lernbereich / Klasse 8 / Mathematik</div>
+      <section class="page-heading"><div><p class="subject-caption" id="subject-caption">Mathematik, Klasse 8</p><h1 id="page-title">Zusammenhänge<br>werden verständlich.</h1><p class="intro" id="intro">Entdecke lineare Funktionen. Schritt für Schritt und mit Platz zum Ausprobieren.</p></div><div class="topic-stamp"><span id="stamp-symbol" aria-hidden="true">ƒ</span><p id="stamp-label">Lineare<br>Funktionen</p></div></section>
+      <div id="workspace"><div class="mode-tabs" role="tablist" aria-label="Lernbereich"><button id="tab-lernen" role="tab" aria-controls="panel" aria-selected="true" tabindex="0" data-mode="lernen"><span aria-hidden="true">↗</span>Stoff lernen</button><button id="tab-ueben" role="tab" aria-controls="panel" aria-selected="false" tabindex="-1" data-mode="ueben"><span aria-hidden="true">✎</span>Unterricht üben</button><button id="tab-schulaufgabe" role="tab" aria-controls="panel" aria-selected="false" tabindex="-1" data-mode="schulaufgabe"><span aria-hidden="true">✓</span>Schulaufgabe</button></div>
+      <section id="panel" role="tabpanel" aria-labelledby="tab-lernen" tabindex="0"></section></div>
+      <section id="planned" hidden aria-label="Geplante Themen"></section>
+      <footer class="footer"><span>Ein Lernraum zum Ausprobieren.</span><button class="text-button" id="about-open">Über diese Testseite</button><a id="source-link" target="_blank" rel="noopener" href="https://www.lehrplanplus.bayern.de/">LehrplanPLUS ↗</a></footer>
+    </main>
+  </div>
+  <div id="announcement" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+  <dialog id="info-dialog" aria-labelledby="info-title"><div class="dialog-top"><h2 id="info-title">So funktioniert das Lernatelier</h2><button class="button ghost small" data-close>Schließen</button></div><div id="info-content"></div></dialog>
+  <dialog id="reset-dialog" aria-labelledby="reset-title"><h2 id="reset-title">Lernstand zurücksetzen?</h2><p>Deine Antworten und Eigenkontrollen auf dieser Testseite werden aus diesem Browser gelöscht. Lade deinen Lernstand vorher herunter, wenn du ihn behalten möchtest.</p><div class="actions"><button class="button secondary" data-close>Abbrechen</button><button class="button" id="reset-confirm">Lernstand löschen</button></div></dialog>
+  <noscript><p>Bitte aktiviere JavaScript, um die Übungen und die lokale Speicherung zu nutzen.</p></noscript>
+</body>
+</html>
