@@ -131,13 +131,31 @@ async function ready(){
   await page.locator('#training-context').fill('Fahrradverleih');await page.locator('#training-setup button[type=submit]').click();await page.locator('#training-status .ai-error').waitFor();assert.equal(requests,3);assert.match(await page.locator('#training-status').innerText(),/nach drei Versuchen/);assert.equal(await page.locator('#training-context').inputValue(),'Fahrradverleih');assert.ok(await page.locator('#training-setup button[type=submit]').isEnabled());
   requests=0;failStatus=429;await page.locator('#training-setup button[type=submit]').click();await page.getByText('Das Tageskontingent ist erreicht.',{exact:true}).waitFor();assert.equal(requests,1);await page.unroute('**/api/generate');
  });
- await check('Jahrgänge und Sprachfolge sind getrennt',async()=>{
-  await choose('englisch');
-  for(const g of ['9','10','11']){await page.locator('#grade').selectOption(g);assert.ok(await page.locator('.topic-row').count()>3);assert.ok(await page.locator('#workspace').isHidden());}
-  await page.locator('#grade').selectOption('8');await page.locator('#variant').selectOption('E2');
-  assert.ok(await page.locator('#workspace').isHidden());assert.doesNotMatch(await page.locator('#planned').innerText(),/London/);
-  await page.locator('#grade').selectOption('9');assert.match(await page.locator('#planned').innerText(),/London/);
-  await page.locator('[data-action=demo]').click();assert.ok(await page.locator('#workspace').isVisible());
+ await check('Alle Jahrgänge sind erreichbar und die Sprachfolgen bleiben getrennt',async()=>{
+  await choose('englisch');await mode('lernen');
+  for(const g of ['9','10','11']){await page.locator('#grade').selectOption(g);assert.ok(await page.locator('.topic-row').count()>3);assert.ok(await page.locator('#workspace').isVisible());}
+  await page.locator('#grade').selectOption('8');await page.locator('#variant').selectOption('E2');assert.doesNotMatch(await page.locator('#panel').innerText(),/London/);
+  await page.locator('#grade').selectOption('9');assert.match(await page.locator('#panel').innerText(),/London/);
+  await page.locator('#grade').selectOption('8');await page.locator('#variant').selectOption('E1');
+ });
+ await check('Üben und Schulaufgaben in allen 14 Fach-Jahrgang-Sprachfolgen',async()=>{
+  const catalog=JSON.parse(fs.readFileSync(path.join(__dirname,'../site/content/catalog.json'),'utf8')),stored=new Map();let target,counter=0;
+  const fulfill=(route,body)=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(body)});
+  await page.route('**/api/generate-practice',async route=>{const b=route.request().postDataJSON();assert.equal(b.subject,target.subject);assert.equal(b.grade,target.grade);if(b.subject==='englisch'&&b.grade<10)assert.equal(b.variant,target.variant);assert.ok(target.topics.some(t=>t.id===b.topicId));const task={id:'matrix-practice-'+(++counter),kind:'exercise',subject:b.subject,grade:b.grade,variant:b.variant,topicIds:[b.topicId],focusId:b.focus,title:'Neue Übung '+counter,assignment:'Schriftliche Testaufgabe zum ausgewählten Thema.',minutes:20,criteria:[{id:'inhalt',name:'Inhalt',max:4},{id:'darstellung',name:'Darstellung',max:2}],level:'Kernaufgaben',taskToken:'matrix-token-'+counter};stored.set(task.id,task);await fulfill(route,task);});
+  await page.route('**/api/generate',async route=>{const b=route.request().postDataJSON();assert.equal(b.subject,target.subject);assert.equal(b.grade,target.grade);assert.ok(b.topics.every(id=>target.topics.some(t=>t.id===id)));const task={id:'matrix-exam-'+(++counter),kind:'exam',subject:b.subject,grade:b.grade,title:'Neue Schulaufgabe '+counter,assignment:'Aufgabe zum gewählten Lehrplanthema.',minutes:b.minutes,criteria:[{id:'inhalt',name:'Inhalt',max:b.points}],taskToken:'matrix-token-'+counter};stored.set(task.id,task);await fulfill(route,task);});
+  await page.route('**/api/grade',async route=>{const b=route.request().postDataJSON(),t=stored.get(b.taskId);assert.ok(t);assert.equal(b.grade,t.grade);assert.equal(b.subject,t.subject);assert.equal(b.taskToken,t.taskToken);const max=t.criteria.reduce((n,c)=>n+c.max,0);await fulfill(route,{summary:'Aufgabenbezogene Rückmeldung.',strengths:['Nachvollziehbar.'],improvements:[],next_step:'Übe eine weitere Aufgabe.',uncertainty:'',criteria:t.criteria.map(c=>({...c,score:c.max,reason:'Passende Bearbeitung.'})),errors:[],score:max,max,assessable_max:max,provisional:false,reference:'Erwartungshorizont der Testaufgabe.'});});
+  for(const group of catalog.groups)for(const variant of group.subject==='englisch'&&group.grade<10?['E1','E2']:['E1']){
+   target={...group,variant,topics:group.topics.filter(t=>t.variant==='gemeinsam'||t.variant.includes(variant))};
+   await choose(group.subject);await page.locator('#grade').selectOption(String(group.grade));if(group.subject==='englisch'&&group.grade<10)await page.locator('#variant').selectOption(variant);await mode('ueben');
+   if(await page.locator('[data-open-practice]').count())await page.locator('[data-open-practice]').click();
+   await page.locator('#practice-topic').selectOption(target.topics[0].id);if(group.subject==='englisch')await page.locator('#practice-focus').selectOption('writing');const expectedPractice=counter+1;await page.locator('#practice-generate').click();await page.getByRole('heading',{name:'Neue Übung '+expectedPractice,exact:true}).waitFor();
+   await page.locator('#generated-practice-answer').fill('Eigene Antwort für '+group.subject+' '+group.grade+' '+variant);await page.locator('.ai-request').click();await page.locator('.ai-result').waitFor();assert.match(await page.locator('.ai-points').innerText(),/6 von 6/);
+   if(group.grade===11){await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await axe('matrix-'+group.subject+'-11');await page.screenshot({path:path.join(out,'generator-'+group.subject+'-11-mobile.png'),fullPage:true});await page.setViewportSize({width:1440,height:1050});}
+   await mode('schulaufgabe');await page.locator('[data-training-step="1"]').click();await page.locator('[data-training-source="generate"]').click();if(!(group.grade===8&&(group.subject!=='englisch'||variant==='E1')))assert.equal(await page.locator('[data-training-source="reference"]').count(),0);if(group.subject!=='deutsch')await page.locator('#training-count').fill('1');const expectedExam=counter+1;await page.locator('#training-setup button[type=submit]').click();await page.getByText('Neue Schulaufgabe '+expectedExam,{exact:true}).waitFor();
+   await page.locator('.training-paper [data-training-step="3"]').click();await page.locator('#training-answer').fill('Meine Bearbeitung für diesen Jahrgang.');await page.locator('#training-submit button[type=submit]').click();await page.locator('.ai-request').click();await page.locator('.ai-result').waitFor();assert.match(await page.locator('.ai-points').innerText(),/von/);
+  }
+  await page.unroute('**/api/generate-practice');await page.unroute('**/api/generate');await page.unroute('**/api/grade');
+  await page.evaluate(()=>{state.practiceView={};save();});await page.locator('#grade').selectOption('8');await choose('englisch');await page.locator('#variant').selectOption('E1');await mode('lernen');
  });
  await check('Tastatur, Dialog und Export',async()=>{
   await page.locator('[data-mode=lernen]').focus();await page.keyboard.press('ArrowRight');

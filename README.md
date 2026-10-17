@@ -6,15 +6,15 @@ Liveadresse: https://danizahnweh-oss.github.io/lernatelier-8-11-test/
 
 ## Benutzbare Inhalte
 
-- Mathematik 8: lineare Funktionen mit fünf Lernschritten, interaktivem Graphen und acht Übungen.
+- Mathematik 8: lineare Funktionen mit fünf Lernschritten, interaktivem Graphen und zwölf Übungen.
 - Deutsch 8: lineares Argumentieren mit vier Lernschritten und sechs Übungen.
 - Englisch 8 E1: London mit fünf Lernschritten, sechs Fertigkeitsübungen, eigenen Lesetexten und zwei künstlich gesprochenen britischen Hörtexten.
 - Bei Erstellungs- oder Prüfungsfehlern werden KI-Aufgaben automatisch bis zu dreimal neu generiert. Einstellungen bleiben erhalten; Eingabefehler und Tageslimits werden ohne Wiederholung angezeigt.
 - Schulaufgabentraining im myAbiFlow-Ablauf: Aufgabe wählen, Aufgabe ansehen, Lösung abgeben, KI-Feedback.
-- KI-generierte Aufgaben mit verbindlicher Themenauswahl, Aufgabenanzahl, Zeit und Punkten; unabhängige zweite Aufgabenprüfung vor der Ausgabe. Eigene Aufgaben können als Text eingegeben oder aus .txt/.md eingelesen werden. Zwei Beispielsätze je Fach bleiben verfügbar.
+- KI-generierte Aufgaben mit verbindlicher Themenauswahl, Aufgabenanzahl, Zeit und Punkten; unabhängige zweite Aufgabenprüfung vor der Ausgabe. Eigene Aufgaben können als Text eingegeben oder aus .txt/.md eingelesen werden. Zwei feste Beispielsätze je Fach bleiben in den vorhandenen Klasse-8-Paketen verfügbar.
 - Start- und pausierbarer Timer, Entwurfsspeicherung, Textdatei-Import für Antworten, Wortzählung und Ausdruck. Bilder/PDF sind in dieser Testfassung noch nicht als Upload implementiert.
 - myAbiFlow-Farben mit Indigo-Akzent, hellen Flächen und dunklen Textfarben.
-- Themenvorschau mit 80 geplanten Themenblöcken für die Klassen 8 bis 11; Englisch E1/E2 wird berücksichtigt.
+- Übungs- und Schulaufgabengenerierung für alle 80 Lehrplanthemen in Mathematik, Deutsch und Englisch der Klassen 8–11. Englisch 8/9 unterscheidet E1 und E2; ab Klasse 10 gilt das gemeinsame Profil. Die Themenübersichten führen direkt in den Generator. Weitere ausgearbeitete Lerntexte werden ergänzt.
 
 Die Inhalte sind Referenzentwürfe zur Erprobung. Sie sind keine amtlichen Prüfungen und noch nicht von Fachlehrkräften freigegeben. Kurze Zahlenergebnisse werden automatisch geprüft. Freie Texte, Rechenwege und Schulaufgabensätze erhalten eine echte KI-Bewertung über OpenAI: serverseitig vorgegebene Aufgaben und Kriterien, Punkte je Kriterium, Stärken, Fehlererklärungen und nächste Schritte. Die KI-Einschätzung ist keine offizielle Schulnote. Eine zusätzliche Eigenkontrolle bleibt möglich. Ein Zeitlimit löscht keine Antworten und erzwingt keine Abgabe.
 
@@ -58,6 +58,8 @@ Vier neue Aufgaben trainieren Tarifvergleiche, Gegenbeispiele zur Eindeutigkeit 
 
 Bei jeder der zwölf Matheaufgaben in Klasse 8 öffnet „Ähnliche Aufgabe mit KI“ die Variante-Erstellung. Die Vorlage wird vom Server ausgewählt, einschließlich Lernziel, Aufgabengruppe und Kompetenz. Jede neue Anfrage hat eine eigene Kennung und berücksichtigt die letzten drei Aufgaben, um Wiederholungen zu vermeiden. Eine unabhängige KI-Prüfung kontrolliert die erstellte Variante. Bei vorübergehenden Fehlern gibt es bis zu drei Versuche; Eingabefehler und Kontingente werden direkt gemeldet.
 
-Aufgaben und Erwartungshorizonte werden verschlüsselt für die Bewertung übergeben. Die Übungsvarianten haben 4 BE für fachliche Richtigkeit und 2 BE für Lösungsweg und Begründung. Vor der Bewertung wird der Erwartungshorizont nicht an die Oberfläche ausgegeben; danach kann er zur Eigenkontrolle geöffnet werden. Bis zu zehn frühere Varianten samt Antwort und KI-Rückmeldung bleiben im Browser. Eine fehlgeschlagene Generierung ersetzt keine vorhandene Bearbeitung.
+Aufgaben und Erwartungshorizonte werden verschlüsselt für die Bewertung übergeben. Die Übungsvarianten haben 6 BE mit fachbezogenen Kriterien: Mathe 4/2 für Inhalt und Lösungsweg; Deutsch 3/1/1/1 für Inhalt, Aufbau, Ausdruck und Richtigkeit; Englisch je nach Reading, Writing, Mediation oder Sprachaufgabe mit passender Inhalts- und Sprachgewichtung. Vor der Bewertung wird der Erwartungshorizont nicht an die Oberfläche ausgegeben; danach kann er zur Eigenkontrolle geöffnet werden. Bis zu zehn frühere Varianten samt Antwort und KI-Rückmeldung bleiben im Browser. Eine fehlgeschlagene Generierung ersetzt keine vorhandene Bearbeitung.
 
-Die [14 ausführlichen Erstellungsprompts](PROMPTS.md) decken Mathe, Deutsch und Englisch in Klasse 8–11 ab, mit getrennten Englisch-Profilen E1/E2 in Klasse 8/9. Sie verwenden die bereitgestellten Lehrpläne und werden serverseitig auch für die unabhängige Prüfung eingesetzt. Die noch geplanten Unterrichtspakete werden dadurch nicht automatisch aktiviert.
+Die [14 ausführlichen Erstellungsprompts](PROMPTS.md) decken Mathe, Deutsch und Englisch in Klasse 8–11 ab, mit getrennten Englisch-Profilen E1/E2 in Klasse 8/9. Sie verwenden die bereitgestellten Lehrpläne und werden serverseitig auch für die unabhängige Prüfung eingesetzt. Alle 14 Profile werden für Erstellung, unabhängige Aufgabenprüfung und KI-Bewertung verwendet. Zusätzliche Lerntexte sind hiervon getrennt und werden ergänzt.
+
+Die allgemeinen Übungsgeneratoren bieten Thema, Anspruch (Grundwissen/Kernaufgabe/Vertiefung) und Aufgabentyp. Aufgaben, Antworten und Verlauf sind nach Fach, Jahrgang und Sprachfolge getrennt; Englisch 10/11 teilt denselben Verlauf unabhängig von der zuvor gewählten Sprachfolge. Die feste Klasse-8-Themeneinschränkung gilt nur noch für die zugehörigen alten Referenzvorlagen. Differenzieren in Mathe 11 und jahrgangsgemäße Textsorten in Deutsch sowie die tatsächlichen Englisch-Themen sind damit möglich. Neue Generatoren erstellen schriftlich prüfbare Aufgaben mit vollständig mitgelieferten Materialien.

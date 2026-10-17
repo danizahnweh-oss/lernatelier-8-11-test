@@ -6,3 +6,13 @@ export function getCreationPrompt({subject,grade,variant='E1'}){
  const key=`${subject}-${grade}${subject==='englisch'&&grade<10?'-'+variant.toLowerCase():''}`;
  const prompt=texts.get(key);if(!prompt)throw new Error('Für diese Fach- und Jahrgangsauswahl fehlt ein geprüftes Lehrplanprofil.');return prompt;
 }
+const catalog=JSON.parse(readFileSync(new URL('../site/content/catalog.json',import.meta.url),'utf8'));
+export function selection(body){
+ if(!body||!['mathematik','deutsch','englisch'].includes(body.subject)||![8,9,10,11].includes(body.grade))throw new Error('Bitte wähle ein verfügbares Fach und einen Jahrgang von 8 bis 11.');
+ if(body.subject==='englisch'&&body.grade<10&&!['E1','E2'].includes(body.variant))throw new Error('Bitte wähle Englisch als erste oder zweite Fremdsprache.');
+ const result={subject:body.subject,grade:body.grade,variant:body.subject==='englisch'&&body.grade<10?body.variant:'E1'};
+ getCreationPrompt(result);return result;
+}
+export function getTopics(body){const s=selection(body);return catalog.groups.find(g=>g.subject===s.subject&&g.grade===s.grade).topics.filter(t=>t.variant==='gemeinsam'||t.variant.includes(s.variant));}
+export const LEVELS={grundwissen:'Grundwissen',kern:'Kernaufgaben',vertiefung:'Vertiefung'};
+export const FOCUSES={mathematik:{passend:'Passend zum Thema',rechnen:'Rechnen und Lösungsweg',begruenden:'Begründen und Prüfen',anwendung:'Modellieren und Anwenden'},deutsch:{passend:'Passend zum Thema',textarbeit:'Textarbeit und Deutung',schreiben:'Schreiben',ueberarbeiten:'Überarbeiten'},englisch:{reading:'Reading',writing:'Writing',mediation:'Mediation',language:'Wortschatz und Grammatik'}};

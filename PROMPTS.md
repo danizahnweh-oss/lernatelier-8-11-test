@@ -22,6 +22,6 @@
 
 ## Einsatzstand
 
-Die interaktive Variante-Erstellung startet bei den zwölf vorhandenen Mathematik-Aufgaben zu linearen Funktionen in Klasse 8. Die 14 Lehrplanprofile sind bereits angelegt; dies schaltet die noch geplanten Lernpakete für Klasse 9–11 oder Englisch E2 nicht automatisch frei. Die verfügbaren Schulaufgaben-Generatoren verwenden ebenfalls das jeweils passende Profil.
+Die Übungs- und Schulaufgabengenerierung ist für Mathematik, Deutsch und Englisch in Klasse 8–11 freigeschaltet. In Englisch 8/9 sind E1 und E2 getrennt auswählbar; ab Klasse 10 gilt das gemeinsame Profil. Themen werden serverseitig anhand des Fachs, Jahrgangs und der Sprachfolge begrenzt. Alle 14 Profile werden bei Erstellung, unabhängiger Aufgabenprüfung und KI-Bewertung geladen. Die zwölf Mathe-Beispielaufgaben in Klasse 8 können weiterhin als Vorlagen dienen. Lerntexte außerhalb der drei vorhandenen Beispielpakete werden schrittweise ergänzt.
 
 Ein Prompt ist keine Garantie fehlerfreier Aufgaben. Die unabhängige zweite KI-Prüfung und serverseitige Prüfungen von Aufgabenanzahl, Kriterien und Punkten bleiben erforderlich.
