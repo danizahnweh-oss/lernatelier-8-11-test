@@ -249,6 +249,29 @@ $$f'(x)=3x^2-2$$
   await page.setViewportSize({width:390,height:844});await choose('mathematik');await mode('lernen');await axe('mobile');
   await page.screenshot({path:path.join(out,'mobile-lernen.png'),fullPage:true});
  });
+ await check('Lehrplanbibliothek: alle Profile, Suche, Selbstkontrolle und gezielter Einstieg',async()=>{
+  const catalog=JSON.parse(fs.readFileSync(path.join(__dirname,'../site/content/catalog.json'),'utf8'));
+  for(const group of catalog.groups)for(const variant of group.subject==='englisch'&&group.grade<10?['E1','E2']:['E1']){
+   await choose(group.subject);await page.locator('#grade').selectOption(String(group.grade));if(group.subject==='englisch'&&group.grade<10)await page.locator('#variant').selectOption(variant);await mode('lernen');
+   const lessons=group.topics.filter(t=>t.kind==='lesson'&&(t.variant==='gemeinsam'||t.variant.includes(variant)));
+   assert.equal(await page.locator('[data-learn-topic]').count(),lessons.length);
+   const target=lessons.at(-1);await page.locator('#topic-search').fill(target.title);
+   const button=page.locator(`[data-learn-topic="${target.id}"]`);assert.ok(await button.isVisible());await button.click();
+   assert.equal(await page.locator('#curriculum-lesson-title').innerText(),target.title);
+   await page.locator('.topic-check summary').click();assert.ok((await page.locator('.topic-check').innerText()).includes(target.lesson.answer));
+   await page.locator('#topic-understood').click();assert.equal(await page.locator('#topic-understood').getAttribute('aria-pressed'),'true');
+   await page.locator('.curriculum-targets summary').click();assert.match(await page.locator('.curriculum-targets').innerText(),/Lehrplan|Kompetenz/);
+   await page.reload();await page.locator('#curriculum-lesson-title').waitFor();assert.equal(await page.locator('#topic-understood').getAttribute('aria-pressed'),'true');
+   await page.locator(`[data-topic-practice="${target.id}"]`).click();assert.equal(await page.locator('#practice-topic').inputValue(),target.id);
+   await mode('lernen');await page.locator(`[data-topic-exam="${target.id}"]`).click();assert.ok(await page.locator(`input[name=topic][value="${target.id}"]`).isChecked());
+  }
+  await choose('mathematik');await page.locator('#grade').selectOption('9');await mode('lernen');await page.locator('#topic-search').fill('Kosinussatz');await page.locator('.topic-row:visible [data-learn-topic]').click();
+  await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await axe('curriculum-lesson-mobile');await page.screenshot({path:path.join(out,'curriculum-mobile.png'),fullPage:true});
+  await page.setViewportSize({width:1440,height:1050});await page.screenshot({path:path.join(out,'curriculum-desktop.png'),fullPage:true});
+  await page.locator('#topic-search').fill('zzunbekanntzz');assert.match(await page.locator('#topic-search-status').innerText(),/0 passende/);assert.equal(await page.locator('.topic-row:visible').count(),0);
+  await page.locator('#topic-search').fill('');assert.equal(await page.locator('[data-learn-topic]').count(),12);
+  await page.locator('#grade').selectOption('8');
+ });
  await check('Speicherfehler bleiben sichtbar',async()=>{
   const isolated=await browser.newPage();await isolated.addInitScript(()=>Storage.prototype.setItem=function(){throw new Error('disabled');});
   await isolated.goto(base);await isolated.locator('#slope').waitFor();

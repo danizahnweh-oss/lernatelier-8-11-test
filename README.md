@@ -14,7 +14,8 @@ Liveadresse: https://danizahnweh-oss.github.io/lernatelier-8-11-test/
 - KI-generierte Aufgaben mit verbindlicher Themenauswahl, Aufgabenanzahl, Zeit und Punkten; unabhängige zweite Aufgabenprüfung vor der Ausgabe. Eigene Aufgaben können als Text eingegeben oder aus .txt/.md eingelesen werden. Zwei feste Beispielsätze je Fach bleiben in den vorhandenen Klasse-8-Paketen verfügbar.
 - Start- und pausierbarer Timer, Entwurfsspeicherung, Textdatei-Import für Antworten, Wortzählung und Ausdruck. Bilder/PDF sind in dieser Testfassung noch nicht als Upload implementiert.
 - myAbiFlow-Farben mit Indigo-Akzent, hellen Flächen und dunklen Textfarben.
-- Übungs- und Schulaufgabengenerierung für alle 80 Lehrplanthemen in Mathematik, Deutsch und Englisch der Klassen 8–11. Englisch 8/9 unterscheidet E1 und E2; ab Klasse 10 gilt das gemeinsame Profil. Die Themenübersichten führen direkt in den Generator. Weitere ausgearbeitete Lerntexte werden ergänzt.
+- Lehrplanbibliothek für alle zugeordneten Bereiche in Mathe, Deutsch und Englisch 8–11: 87 Themenfelder und 261 Kurzlektionen mit Erklärungen, Beispielen, Verständnisfragen und Lösungen. Suche und lokale Verständnis-Markierungen erleichtern das Wiederholen. Alle 157 Abschnitte der 14 bereitgestellten PDFs sind zugeordnet; siehe [Lehrplanabdeckung](CURRICULUM.md).
+- Jeder Themenblock und jedes Teilthema ist in Übungs- und Schulaufgabengenerierung auswählbar. Der Server ordnet die Original-Lehrplanziele zu. Englisch 8/9 trennt E1/E2. MuG ist als Zusatz gekennzeichnet. Mündliche und praktische Kompetenzen können schriftlich vorbereitet werden; eine tatsächliche Hör-, Sprech- oder Aufführungsprüfung braucht entsprechendes Material.
 
 Die Inhalte sind Referenzentwürfe zur Erprobung. Sie sind keine amtlichen Prüfungen und noch nicht von Fachlehrkräften freigegeben. Kurze Zahlenergebnisse werden automatisch geprüft. Freie Texte, Rechenwege und Schulaufgabensätze erhalten eine echte KI-Bewertung über OpenAI: serverseitig vorgegebene Aufgaben und Kriterien, Punkte je Kriterium, Stärken, Fehlererklärungen und nächste Schritte. Die KI-Einschätzung ist keine offizielle Schulnote. Eine zusätzliche Eigenkontrolle bleibt möglich. Ein Zeitlimit löscht keine Antworten und erzwingt keine Abgabe.
 
@@ -26,7 +27,7 @@ Entwürfe, Selbsteinschätzungen und KI-Rückmeldungen liegen im lokalen Browser
 
 `site/` mit einem beliebigen statischen Webserver bereitstellen, zum Beispiel `python3 -m http.server 4173 --directory site`. Keine Installation oder Build-Schritte für die Website nötig.
 
-Für die Browserprüfungen: `npm ci`, bei Bedarf `npx playwright install chromium`, danach `npm test`. `npm run test:grading` prüft die serverseitigen Bewertungsregeln ohne echte API-Aufrufe. `TEST_BASE_URL` kann eine bereits laufende lokale Instanz oder die veröffentlichte Adresse setzen. Screenshot- und Prüfdateien landen in `test-results/` und werden nicht veröffentlicht.
+Für die Browserprüfungen: `npm ci`, bei Bedarf `npx playwright install chromium`, danach `npm test`. `npm run test:curriculum` prüft alle Themenauswahlen, Quellenzuordnungen und Sprachfolgegrenzen. `npm run test:grading` prüft die serverseitigen Bewertungsregeln ohne echte API-Aufrufe. `TEST_BASE_URL` kann eine bereits laufende lokale Instanz oder die veröffentlichte Adresse setzen. Screenshot- und Prüfdateien landen in `test-results/` und werden nicht veröffentlicht.
 
 ## Veröffentlichung
 
@@ -63,3 +64,5 @@ Aufgaben und Erwartungshorizonte werden verschlüsselt für die Bewertung überg
 Die [14 ausführlichen Erstellungsprompts](PROMPTS.md) decken Mathe, Deutsch und Englisch in Klasse 8–11 ab, mit getrennten Englisch-Profilen E1/E2 in Klasse 8/9. Sie verwenden die bereitgestellten Lehrpläne und werden serverseitig auch für die unabhängige Prüfung eingesetzt. Alle 14 Profile werden für Erstellung, unabhängige Aufgabenprüfung und KI-Bewertung verwendet. Zusätzliche Lerntexte sind hiervon getrennt und werden ergänzt.
 
 Die allgemeinen Übungsgeneratoren bieten Thema, Anspruch (Grundwissen/Kernaufgabe/Vertiefung) und Aufgabentyp. Aufgaben, Antworten und Verlauf sind nach Fach, Jahrgang und Sprachfolge getrennt; Englisch 10/11 teilt denselben Verlauf unabhängig von der zuvor gewählten Sprachfolge. Die feste Klasse-8-Themeneinschränkung gilt nur noch für die zugehörigen alten Referenzvorlagen. Differenzieren in Mathe 11 und jahrgangsgemäße Textsorten in Deutsch sowie die tatsächlichen Englisch-Themen sind damit möglich. Neue Generatoren erstellen schriftlich prüfbare Aufgaben mit vollständig mitgelieferten Materialien.
+
+Die redaktionellen Lerneinheiten liegen in `curriculum/*.txt`. `python3 scripts/build-curriculum.py` erstellt Themenkatalog, Quellenzuordnung und Abdeckungsbericht reproduzierbar. Die vollständigen Lehrplanziele bleiben als aus den PDFs abgeleitete Referenztexte erhalten.

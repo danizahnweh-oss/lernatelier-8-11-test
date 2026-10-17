@@ -5,7 +5,8 @@
   "description": "Eigenständige Lernatelier-Testseite für Gymnasium Bayern G9",
   "scripts": {
     "test": "node tests/smoke.cjs",
-    "test:grading": "node --test tests/grading.test.mjs"
+    "test:grading": "node --test tests/grading.test.mjs",
+    "test:curriculum": "node --test tests/curriculum.test.mjs"
   },
   "devDependencies": {
     "axe-core": "^4.10.3",

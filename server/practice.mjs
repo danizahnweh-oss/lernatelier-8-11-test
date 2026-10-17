@@ -1,6 +1,6 @@
 import {readFileSync} from 'node:fs';
 import {randomUUID} from 'node:crypto';
-import {selection,getTopics,LEVELS,FOCUSES} from './curriculum.mjs';
+import {selection,getTopics,getTopicScope,LEVELS,FOCUSES} from './curriculum.mjs';
 const math=JSON.parse(readFileSync(new URL('../site/content/packages.json',import.meta.url),'utf8')).mathematik;
 export function preparePracticeGeneration(body){
  const s=selection(body),all=getTopics(s);
@@ -15,5 +15,5 @@ export function preparePracticeGeneration(body){
  }else{
   topic=all.find(t=>t.id===body.topicId);if(!topic)throw new Error('Wähle ein Thema aus dem Lehrplan dieses Jahrgangs und dieser Sprachfolge.');
  }
- return {...s,mode:'practice',source:'generate',count:1,points:6,minutes:s.subject==='mathematik'?10:20,context:'',ownTask:'',topics:[topic.title],topicIds:[topic.id],learningGoal:topic.competency_goal,prerequisites:topic.prerequisite_skills,level:LEVELS[level],focus:FOCUSES[s.subject][focus],focusId:focus,competencies:template?math.exercises.find(t=>t.id===template.id).competencies.map(k=>math.practiceStructure.competencies[k]):[topic.competency_goal],...(template?{template}:{}),avoid,requestId:typeof body.requestId==='string'?body.requestId.slice(0,80):randomUUID()};
+ return {...s,mode:'practice',source:'generate',count:1,points:6,minutes:s.subject==='mathematik'?10:20,context:'',ownTask:'',topics:[topic.title],curriculumScope:getTopicScope(s,[topic]),topicIds:[topic.id],learningGoal:topic.competency_goal,prerequisites:topic.prerequisite_skills,level:LEVELS[level],focus:FOCUSES[s.subject][focus],focusId:focus,competencies:template?math.exercises.find(t=>t.id===template.id).competencies.map(k=>math.practiceStructure.competencies[k]):[topic.competency_goal],...(template?{template}:{}),avoid,requestId:typeof body.requestId==='string'?body.requestId.slice(0,80):randomUUID()};
 }
