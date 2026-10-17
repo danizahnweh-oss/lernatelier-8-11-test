@@ -2,7 +2,7 @@
 const KEY = 'lernatelier-test-v1';
 const $ = s => document.querySelector(s);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const md = value => DOMPurify.sanitize(marked.parse(String(value || '')), {USE_PROFILES:{html:true}});
+const md = value => TaskRenderer.render(value);
 const fresh = () => ({version:1,grade:8,subject:'mathematik',variant:'E1',mode:'lernen',lesson:{},exercise:{},answers:{},exams:{},training:{},mathFilters:{},generatedPractice:{},practiceView:{}});
 let state = fresh(), packs, catalog, recorder, recordingStream, recordingURL;
 let storageError = false;

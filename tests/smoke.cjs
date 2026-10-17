@@ -28,6 +28,59 @@ async function ready(){
  };
  try{
  await page.goto(base);await page.locator('#slope').waitFor();
+ await check('Aufgabenformat: Tabellen, Zeichencodes und mathematische Formeln',async()=>{
+  const fixture=String.raw`### Material 1: Gegebene Funktionsgleichungen
+
+1. f(x) = 2x − 1
+2. g(x) = −\u00bd x + 2
+
+### Material 2: Drei Tabellen (A, B, C)
+
+#### Tabelle A: x | −1 | 0 | 1 | 2
+
+y | −3 | −1 | 1 | 3
+
+#### Tabelle B: x | −2 | −1 | 0 | 2
+
+y | 3 | 2 | 2 | 1
+
+#### Tabelle C: x | −1 | 0 | 1 | −1
+
+y | 3 | 1 | −1 | −3
+
+### Formeln
+
+$g(x)=-\frac{1}{2}x+2$ und \(\sqrt{x^2+1}\).
+
+$$f'(x)=3x^2-2$$
+
+| Zeitpunkt | Wert |
+| --- | --- |
+| 0 | 800 |
+
+<img src="invalid" onerror="window.renderingXSS=true"><script>window.renderingXSS=true</script>
+`;
+  await page.evaluate(text=>{
+   const section=document.createElement('section');section.id='format-fixture';section.className='exercise-sheet training-paper';
+   section.innerHTML='<h2>Zuordnungen als Funktionen erkennen</h2>'+TaskRenderer.render(text);document.querySelector('#panel').prepend(section);
+  },fixture);
+  const sheet=page.locator('#format-fixture');
+  assert.equal(await sheet.locator('table').count(),4);
+  assert.equal(await sheet.locator('table').first().locator('tr').count(),2);
+  assert.equal(await sheet.locator('table').last().locator('tr').count(),2);
+  assert.doesNotMatch(await sheet.locator('table').last().innerText(),/---/);
+  assert.equal(await sheet.locator('table').first().locator('tbody th[scope=row]').innerText(),'y');
+  assert.match(await sheet.innerText(),/−½ x/);assert.doesNotMatch(await sheet.innerText(),/\\u00bd/);
+  assert.equal(await sheet.locator('.katex').count(),3);assert.equal(await sheet.locator('math').count(),3);
+  assert.equal(await sheet.locator('[onerror],script').count(),0);assert.equal(await page.evaluate(()=>window.renderingXSS),undefined);
+  assert.equal(await page.evaluate(()=>TaskRenderer.render('`$x$`').includes('class="katex"')),false);
+  await sheet.locator('img').evaluateAll(images=>images.forEach(img=>img.remove()));
+  await sheet.screenshot({path:path.join(out,'task-format-desktop.png')});
+  await page.setViewportSize({width:390,height:844});
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+  await sheet.screenshot({path:path.join(out,'task-format-mobile.png')});await axe('task-format-mobile');
+  await sheet.evaluate(node=>node.remove());await page.setViewportSize({width:1440,height:1050});
+ });
  await check('Lernschritte und interaktiver Graph',async()=>{
   assert.match(await page.locator('.lesson-count').innerText(),/1 von 5/);
   await page.locator('#slope').fill('2');await page.locator('#slope').dispatchEvent('input');

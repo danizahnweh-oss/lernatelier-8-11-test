@@ -4,7 +4,13 @@ export const profiles=JSON.parse(readFileSync(new URL('index.json',root),'utf8')
 const texts=new Map(profiles.map(p=>[p.id,readFileSync(new URL(p.file,root),'utf8')]));
 export function getCreationPrompt({subject,grade,variant='E1'}){
  const key=`${subject}-${grade}${subject==='englisch'&&grade<10?'-'+variant.toLowerCase():''}`;
- const prompt=texts.get(key);if(!prompt)throw new Error('Für diese Fach- und Jahrgangsauswahl fehlt ein geprüftes Lehrplanprofil.');return prompt;
+ const prompt=texts.get(key);if(!prompt)throw new Error('Für diese Fach- und Jahrgangsauswahl fehlt ein geprüftes Lehrplanprofil.');return prompt+String.raw`
+
+## Verbindliche Darstellung in allen Ausgabefeldern
+- Tabellen immer als vollständige Markdown-Tabelle mit eigener Kopfzeile, Trennzeile (| --- | --- |) und separaten Datenzeilen ausgeben. Überschrift und Tabelle durch eine Leerzeile trennen. Keine Tabellenzeilen innerhalb einer Überschrift und keine bloß mit | getrennten Textzeilen.
+- Tatsächliche Unicode-Zeichen schreiben (z. B. ½, −, ×), niemals wörtliche Unicode-Escapesequenzen. Einfache Terme dürfen Klartext sein. Für Brüche, Wurzeln, Potenzen und komplexe Formeln LaTeX mit $...$ im Fließtext oder $$...$$ als eigene Formel verwenden, z. B. $g(x)=-\frac{1}{2}x+2$. Im JSON Backslashes korrekt maskieren.
+- Materialtitel nur als Titel, den Inhalt ausschließlich in text ausgeben. Überschriften im Materialtext höchstens Ebene 4. Dieselben Formatregeln gelten für Aufgaben, Musterlösungen und die unabhängige Nachprüfung.
+`;
 }
 const catalog=JSON.parse(readFileSync(new URL('../site/content/catalog.json',import.meta.url),'utf8'));
 export function selection(body){
