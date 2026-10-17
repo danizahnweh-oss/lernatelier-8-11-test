@@ -30,7 +30,7 @@ Für die Browserprüfungen: `npm ci`, bei Bedarf `npx playwright install chromiu
 
 ## Veröffentlichung
 
-Eigenes GitHub-Repository mit GitHub Pages über `.github/workflows/pages.yml`. Nur `site/` wird ausgeliefert. Relative Assetpfade unterstützen einen eigenen Unterpfad. `robots.txt` und Meta-Tag bitten Suchmaschinen, die Testseite nicht zu indexieren; das ist kein Zugriffsschutz.
+Eigenes GitHub-Repository mit GitHub Pages über `.github/workflows/pages.yml`. Nur `site/` wird ausgeliefert. Die geänderten Frontend-Dateien tragen eine Versionskennung in den Asset-URLs, damit bereits geöffnete Browser nach dem Neuladen die aktuelle Oberfläche verwenden. Bei weiteren Änderungen diese Kennung aktualisieren. Relative Assetpfade unterstützen einen eigenen Unterpfad. `robots.txt` und Meta-Tag bitten Suchmaschinen, die Testseite nicht zu indexieren; das ist kein Zugriffsschutz.
 
 Die gewünschte Adresse daniel-zahnweh.de ist bereits einer bestehenden Homepage zugeordnet. Dieses Projekt verändert deren DNS, Inhalte und Hosting nicht. Es wird zunächst auf einer separaten GitHub-Pages-Adresse veröffentlicht. Ein späterer eigener Unterpfad oder eine Subdomain kann gezielt eingerichtet werden.
 
