@@ -9,7 +9,10 @@ Liveadresse: https://danizahnweh-oss.github.io/lernatelier-8-11-test/
 - Mathematik 8: lineare Funktionen mit fünf Lernschritten, interaktivem Graphen und acht Übungen.
 - Deutsch 8: lineares Argumentieren mit vier Lernschritten und sechs Übungen.
 - Englisch 8 E1: London mit fünf Lernschritten, sechs Fertigkeitsübungen, eigenen Lesetexten und zwei künstlich gesprochenen britischen Hörtexten.
-- Zwei Schulaufgaben-Übungssätze je Fach, wahlweise mit oder ohne Zeitvorgabe, mit Entwurfsspeicherung, KI-Bewertung und zusätzlicher Eigenkontrolle.
+- Schulaufgabentraining im myAbiFlow-Ablauf: Aufgabe wählen, Aufgabe ansehen, Lösung abgeben, KI-Feedback.
+- KI-generierte Aufgaben mit verbindlicher Themenauswahl, Aufgabenanzahl, Zeit und Punkten; unabhängige zweite Aufgabenprüfung vor der Ausgabe. Eigene Aufgaben können als Text eingegeben oder aus .txt/.md eingelesen werden. Zwei Beispielsätze je Fach bleiben verfügbar.
+- Start- und pausierbarer Timer, Entwurfsspeicherung, Textdatei-Import für Antworten, Wortzählung und Ausdruck. Bilder/PDF sind in dieser Testfassung noch nicht als Upload implementiert.
+- myAbiFlow-Farben mit Indigo-Akzent, hellen Flächen und dunklen Textfarben.
 - Themenvorschau mit 80 geplanten Themenblöcken für die Klassen 8 bis 11; Englisch E1/E2 wird berücksichtigt.
 
 Die Inhalte sind Referenzentwürfe zur Erprobung. Sie sind keine amtlichen Prüfungen und noch nicht von Fachlehrkräften freigegeben. Kurze Zahlenergebnisse werden automatisch geprüft. Freie Texte, Rechenwege und Schulaufgabensätze erhalten eine echte KI-Bewertung über OpenAI: serverseitig vorgegebene Aufgaben und Kriterien, Punkte je Kriterium, Stärken, Fehlererklärungen und nächste Schritte. Die KI-Einschätzung ist keine offizielle Schulnote. Eine zusätzliche Eigenkontrolle bleibt möglich. Ein Zeitlimit löscht keine Antworten und erzwingt keine Abgabe.
@@ -41,3 +44,5 @@ DM Sans: Copyright The DM Sans Project Authors, SIL Open Font License 1.1, siehe
 `server/server.mjs` ist ein eigener Node-22-Dienst. `deploy/setup-server.sh` beschreibt die isolierte Einrichtung unter `/opt/lernatelier-test`, mit eigener systemd-Unit, eigener Konfiguration und eigenem Nginx-Virtualhost. Die vorhandene myAbiFlow-Anwendung wird nicht verändert. Für diesen Test wird der vorhandene OpenAI-Zugang nur serverseitig in die eigene Konfiguration übernommen; es werden keine myAbiFlow-Konten oder Lerndaten verwendet. Das Anbietermodell steht in `OPENAI_MODEL` (initial `gpt-5-mini`). Öffentliche API-Adresse in `site/api-config.json`.
 
 Offizielle Implementierungsreferenzen: [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs?api-mode=responses), [Responses API](https://developers.openai.com/api/docs/guides/migrate-to-responses) und [Modellbeschreibung](https://developers.openai.com/api/docs/models/gpt-5-mini). Schülerdaten werden nur nach der im Chat erteilten Freigabe an OpenAI übermittelt.
+
+Generierte Aufgaben samt Erwartungshorizont und Raster werden in einem verschlüsselten und authentifizierten Aufgaben-Token mit sieben Tagen Laufzeit gehalten. Der Browser sendet zur Bewertung das Token; der Server prüft es und verwendet ausschließlich den darin bestätigten Auftrag und dessen Kriterien. Die Lösung wird nicht vor der Abgabe angezeigt. Im eigenen Aufgabentext enthaltene Anweisungen dürfen die Systemregeln nicht ersetzen. Eine neue Aufgabe sichert die bisherige Bearbeitung im lokalen Verlauf (maximal zehn je Fachkontext); der JSON-Export enthält den Verlauf.

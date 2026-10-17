@@ -3,8 +3,8 @@ const KEY = 'lernatelier-test-v1';
 const $ = s => document.querySelector(s);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const md = value => DOMPurify.sanitize(marked.parse(String(value || '')), {USE_PROFILES:{html:true}});
-const fresh = () => ({version:1,grade:8,subject:'mathematik',variant:'E1',mode:'lernen',lesson:{},exercise:{},answers:{},exams:{}});
-let state = fresh(), packs, catalog, timerInterval, recorder, recordingStream, recordingURL;
+const fresh = () => ({version:1,grade:8,subject:'mathematik',variant:'E1',mode:'lernen',lesson:{},exercise:{},answers:{},exams:{},training:{}});
+let state = fresh(), packs, catalog, recorder, recordingStream, recordingURL;
 let storageError = false;
 try {
   const saved = JSON.parse(localStorage.getItem(KEY));
@@ -36,7 +36,7 @@ function stopRecording() {
   recordingStream=null;
 }
 function render() {
-  clearInterval(timerInterval); stopRecording();
+  Schultraining.stop(); stopRecording();
   document.querySelectorAll('audio').forEach(a=>a.pause());
   if(recordingURL) { URL.revokeObjectURL(recordingURL); recordingURL=null; }
   const names={mathematik:'Mathematik',deutsch:'Deutsch',englisch:'Englisch'};
@@ -68,8 +68,8 @@ function renderPlanned() {
 function sectionTop(title,sub,pill='') { return `<div class="section-top"><div><h2>${esc(title)}</h2><p>${esc(sub)}</p></div>${pill?`<span class="pill">${esc(pill)}</span>`:''}</div>`; }
 function graph() {
   let lines='';
-  for(let n=-5;n<=5;n++) { const pos=150+n*24; lines+=`<line x1="30" y1="${pos}" x2="270" y2="${pos}" stroke="#dce6df"/><line x1="${pos}" y1="30" x2="${pos}" y2="270" stroke="#dce6df"/>`; }
-  return `<div class="graph-panel"><div class="graph-top"><strong>Einfach ausprobieren</strong><span>Interaktiver Graph</span></div><svg viewBox="0 0 300 300" role="img" aria-labelledby="graph-title graph-desc"><title id="graph-title">Graph einer linearen Funktion</title><desc id="graph-desc">y gleich 1 mal x plus 1. Ändere die Steigung oder den Achsenabschnitt mit den Reglern.</desc><defs><clipPath id="plot-clip"><rect x="30" y="30" width="240" height="240"/></clipPath></defs>${lines}<path d="M30 150H275M150 270V25" fill="none" stroke="#80978d" stroke-width="1.5"/><g fill="#536568" font-family="sans-serif" font-size="11"><text x="279" y="154">x</text><text x="155" y="23">y</text><text x="138" y="166">0</text><text x="194" y="166">2</text><text x="133" y="106">2</text><text x="98" y="166">−2</text></g><path id="function-line" d="M30 246L270 6" stroke="#185b4b" stroke-width="3" fill="none" clip-path="url(#plot-clip)"/><circle id="function-intercept" cx="150" cy="126" r="5" fill="#185b4b"/></svg><div class="graph-formula" id="formula">y = x + 1</div><div class="graph-controls"><div><label for="slope">Steigung m <output id="slope-value" for="slope">1</output></label><input id="slope" type="range" min="-3" max="3" step="0.5" value="1"></div><div><label for="intercept">Achsenabschnitt t <output id="intercept-value" for="intercept">1</output></label><input id="intercept" type="range" min="-4" max="4" step="1" value="1"></div></div><p class="graph-help">Was verändert sich, wenn du nur m bewegst? Und was bleibt gleich?</p></div>`;
+  for(let n=-5;n<=5;n++) { const pos=150+n*24; lines+=`<line x1="30" y1="${pos}" x2="270" y2="${pos}" stroke="#e2e8f0"/><line x1="${pos}" y1="30" x2="${pos}" y2="270" stroke="#e2e8f0"/>`; }
+  return `<div class="graph-panel"><div class="graph-top"><strong>Einfach ausprobieren</strong><span>Interaktiver Graph</span></div><svg viewBox="0 0 300 300" role="img" aria-labelledby="graph-title graph-desc"><title id="graph-title">Graph einer linearen Funktion</title><desc id="graph-desc">y gleich 1 mal x plus 1. Ändere die Steigung oder den Achsenabschnitt mit den Reglern.</desc><defs><clipPath id="plot-clip"><rect x="30" y="30" width="240" height="240"/></clipPath></defs>${lines}<path d="M30 150H275M150 270V25" fill="none" stroke="#94a3b8" stroke-width="1.5"/><g fill="#475569" font-family="sans-serif" font-size="11"><text x="279" y="154">x</text><text x="155" y="23">y</text><text x="138" y="166">0</text><text x="194" y="166">2</text><text x="133" y="106">2</text><text x="98" y="166">−2</text></g><path id="function-line" d="M30 246L270 6" stroke="#4f46e5" stroke-width="3" fill="none" clip-path="url(#plot-clip)"/><circle id="function-intercept" cx="150" cy="126" r="5" fill="#4f46e5"/></svg><div class="graph-formula" id="formula">y = x + 1</div><div class="graph-controls"><div><label for="slope">Steigung m <output id="slope-value" for="slope">1</output></label><input id="slope" type="range" min="-3" max="3" step="0.5" value="1"></div><div><label for="intercept">Achsenabschnitt t <output id="intercept-value" for="intercept">1</output></label><input id="intercept" type="range" min="-4" max="4" step="1" value="1"></div></div><p class="graph-help">Was verändert sich, wenn du nur m bewegst? Und was bleibt gleich?</p></div>`;
 }
 function renderLearn() {
   const p=pack(), i=keyIndex(context(),p.lessons.length,state.lesson), lesson=p.lessons[i];
@@ -146,45 +146,10 @@ async function startRecording() {
     recorder.start();$('#record-start').disabled=true;$('#record-stop').disabled=false;$('#record-status').textContent='Aufnahme läuft. Deine Stimme wird nicht hochgeladen.';
   } catch { $('#record-status').textContent='Kein Mikrofonzugriff. Du kannst die Aufgabe auch ohne Aufnahme bearbeiten.'; }
 }
-function examKey() { return `${context()}-${state.examVariant||'A'}`; }
-function examData() { return state.exams[examKey()]; }
-function examRubric() {
-  if(state.subject==='mathematik') return [['Aufgabe 1',4],['Aufgabe 2',4],['Aufgabe 3',6],['Aufgabe 4',6]];
-  if(state.subject==='deutsch') return [['Inhalt und Argumentation',8],['Aufbau und Zusammenhang',6],['Ausdruck und Adressatenbezug',4],['Sprachliche Richtigkeit',2]];
-  return [['Reading',6],['Listening',6],['Writing',10],['Mediation',8]];
-}
-function rubricText() {
-  if(state.subject==='deutsch') return 'Inhalt: Position 2, zwei begründete Argumente mit Beispiel je 2, Materialbezug 2. Aufbau: Einleitung 2, geordnete Absätze 2, Schluss 2. Ausdruck: Verständlichkeit 2, Wortwahl und Ansprache 2. Sprachliche Richtigkeit: 0 bis 2. Andere begründete Positionen sind gleichwertig.';
-  if(state.subject==='englisch') return 'Writing: vier geforderte Inhalte je 1 Punkt, Aufbau und Adressatenbezug 2, verständliche Sprache 4. Mediation: vier Inhaltseinheiten insgesamt 4, Adressatenbezug 2, Verständlichkeit 2. Reading und Listening: je Frage 2 Punkte nach dem Erwartungshorizont. Sinngemäß richtige Antworten gelten.';
-  return 'Vergleiche jeden Rechenschritt mit der Punkteverteilung. Alternative richtige Wege gelten ebenfalls. Ein Folgefehler wird nicht mehrfach abgezogen. Zeichnungen prüfst du auf Achsen, Punkte und Verlauf.';
-}
-function renderExam() {
-  const p=pack(),label=state.examVariant||'A',e=p.exams.find(x=>x.label===label),a=examData();
-  let out=sectionTop('Für den nächsten Leistungsnachweis.','Ein vollständiger Übungssatz. Mit deinem eigenen Stoff und Tempo.');
-  out+=`<div class="section-top"><div><label for="exam-variant">Übungssatz wählen</label><select id="exam-variant"><option value="A" ${label==='A'?'selected':''}>Übungssatz A</option><option value="B" ${label==='B'?'selected':''}>Übungssatz B</option></select></div><span class="pill">${state.subject==='englisch'?'30':'20'} Übungspunkte</span></div>`;
-  if(!a) {
-    out+=`<div class="exam-setup"><div><h3>${esc(e.title)}</h3><p>${state.subject==='mathematik'?'Zeige deinen Rechenweg und halte deine Skizzen auf Papier fest.':'Bearbeite die Aufgaben in einem zusammenhängenden Durchgang.'}</p><p>Dieser Übungssatz ist ein Unterrichtsbeispiel. Nach der Abgabe erhältst du eine KI-Bewertung mit Punkten und konkreten Verbesserungstipps. Eine Eigenkontrolle ist zusätzlich möglich.</p><p><strong>Hilfsmittel:</strong> ${state.subject==='mathematik'?'Lineal und kariertes Papier. Die Zahlen sind ohne Taschenrechner bearbeitbar.':state.subject==='deutsch'?'Aufgabenmaterial und bei Bedarf ein Rechtschreibwörterbuch.':'Aufgabenmaterial und die beiden Hördurchgänge. In der Simulation ohne Wörterbuch.'}</p></div><form id="exam-start" class="exam-options"><fieldset><legend>Dein Tempo</legend><label class="radio-row"><input type="radio" name="timing" value="free" checked>Ohne Zeitvorgabe</label><label class="radio-row"><input type="radio" name="timing" value="timed">Mit ${state.subject==='mathematik'?30:45} Minuten Zeit</label></fieldset><p class="self-check-note">Lösungen erscheinen erst nach deiner Abgabe. Dein Entwurf wird in diesem Browser gespeichert.</p><button class="button" type="submit">Übungssatz beginnen ↗</button></form></div>`;
-  } else {
-    out+=`<div class="exam-header"><h2>${esc(e.title)}</h2>${a.submitted?'<span class="pill">Abgegeben</span>':a.deadline?'<span id="timer" class="timer" role="timer" aria-label="Verbleibende Bearbeitungszeit"></span>':'<span class="pill">In deinem Tempo</span>'}</div><article class="exam-paper"><div>${md(e.assignment)}</div>${materials(true,!!a.submitted,label)}<section class="response-area"><h3>${a.submitted?'Deine abgegebene Antwort':'Deine Bearbeitung'}</h3>${a.submitted?`<div class="submission">${esc(a.text)}</div><h3>Erwartungshorizont</h3>${md(e.answer)}<p>${esc(rubricText())}</p><div id="ai-exam"></div><h3>Zusätzliche Eigenkontrolle</h3><p class="muted">Vergib Punkte anhand des Erwartungshorizonts. Das ist deine Selbsteinschätzung, keine automatische Bewertung.</p><div class="rubric-grid">${examRubric().map(([name,max],i)=>`<div><label for="score-${i}">${esc(name)} (0 bis ${max})</label><select id="score-${i}" data-score="${i}"><option value="">Noch nicht eingeschätzt</option>${Array.from({length:max*2+1},(_,n)=>n/2).map(v=>`<option value="${v}" ${a.scores?.[i]===v?'selected':''}>${v.toLocaleString('de-DE')} Punkte</option>`).join('')}</select></div>`).join('')}</div><div id="score-total">${scoreTotal(a)}</div><div class="actions"><button class="button secondary" data-action="print">Bearbeitung drucken</button><button class="text-button" data-action="exam-next">Anderen Übungssatz wählen →</button></div>`:`<form id="exam-submit"><label for="exam-answer">Antworten mit Aufgabennummern${state.subject==='mathematik'?' und Rechenschritten':''}</label><textarea id="exam-answer" maxlength="20000" required>${esc(a.text||'')}</textarea><p class="self-check-note">${state.subject==='mathematik'?'Zeichnungen bleiben auf deinem Papier und werden bei der Eigenkontrolle verglichen. ':''}Du kannst den Bereich wechseln und später hier weiterarbeiten.</p><div class="actions"><button class="button" type="submit">Bearbeitung abgeben</button><button class="button secondary" type="button" data-action="pause-exam">Unterbrechen und lernen</button></div></form>`}</section></article>`;
-  }
-  $('#panel').innerHTML=out;
-  if(a?.submitted){$('.submission').after($('#ai-exam'));const id=examKey(),task={subject:state.subject,grade:8,variant:state.variant,kind:'exam',taskId:label};LernKI.mount($('#ai-exam'),{task,getAnswer:()=>a.text,getStored:()=>state.exams[id]?.ai,onSave:record=>{if(state.exams[id]?.text.trim()===record.answer){state.exams[id].ai=record;save();}}});}
-  if(a?.deadline&&!a.submitted) { tick();timerInterval=setInterval(tick,1000); }
-}
-function scoreTotal(a) {
-  const max=examRubric().reduce((sum,v)=>sum+v[1],0),scores=a.scores||[];
-  const complete=examRubric().every((_,i)=>typeof scores[i]==='number'&&Number.isFinite(scores[i]));
-  return complete?`<p class="result-total">${scores.reduce((s,n)=>s+n,0).toLocaleString('de-DE')} von ${max} Punkten</p><p class="self-check-note">Deine Eigenkontrolle. Wähle anschließend eine Aufgabe, die du noch einmal üben möchtest.</p>`:'<p class="self-check-note">Schätze alle vier Bereiche ein, um deine Gesamtpunktzahl zu sehen.</p>';
-}
-function tick() {
-  const a=examData(); if(!a?.deadline||!$('#timer')) return;
-  const seconds=Math.max(0,Math.ceil((a.deadline-Date.now())/1000));
-  $('#timer').textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;
-  if(!seconds) { clearInterval(timerInterval);$('#timer').textContent='Zeit abgelaufen';announce('Die vorgesehene Zeit ist abgelaufen. Deine Antwort bleibt erhalten. Du kannst jetzt abgeben oder weiterarbeiten.'); }
-}
+function renderExam(){Schultraining.mount({root:$('#panel'),state:()=>state,context,pack,md,materials,save});}
 function info(kind='help') {
   $('#info-title').textContent=kind==='about'?'Über diese Testseite':'So funktioniert das Lernatelier';
-  $('#info-content').innerHTML=kind==='about'?`<p>Dies ist eine eigenständige Testseite von Daniel Zahnweh. Sie ist von myAbiFlow technisch getrennt und nutzt einen eigenen KI-Bewertungsdienst ohne Zugriff auf myAbiFlow-Konten oder Lernergebnisse.</p><p>Interaktiv verfügbar: drei Klasse-8-Pakete. Klassen 9 bis 11 und Englisch 8 als zweite Fremdsprache zeigen den geplanten Ausbau. Die Inhalte sind Referenzentwürfe zur Erprobung, keine amtlichen Prüfungen.</p><p>Entwürfe, Eigenkontrollen und erhaltene KI-Rückmeldungen werden in deinem Browser gespeichert. Wenn du eine KI-Bewertung anforderst und die Übermittlung bestätigst, werden deine Antwort, Aufgabenstellung und Bewertungsraster an den separaten Bewertungsdienst und OpenAI übermittelt. Der Dienst speichert keine Antworttexte dauerhaft; für die Wiederholung derselben Anfrage können sie vorübergehend bis zu einer Stunde im Arbeitsspeicher vorliegen. OpenAI verarbeitet die Anfrage nach seinen API-Datenschutzbedingungen. Bitte keine Namen oder persönlichen Angaben eingeben. Die Punkte sind KI-Einschätzungen und keine offiziellen Schulnoten. Mikrofonaufnahmen werden nicht hochgeladen und verschwinden beim Verlassen der Aufnahmeansicht, wenn du sie nicht herunterlädst. Es gibt keine Analyse- oder Werbedienste.</p><p>GitHub Pages stellt die Website bereit und verarbeitet dabei technisch notwendige Zugriffsdaten. <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">Datenschutzhinweise von GitHub</a>.</p><p>Kontakt: <a href="mailto:info@myabiflow.de">info@myabiflow.de</a>. <a href="https://myabiflow.de/impressum.html" target="_blank" rel="noopener">Angaben zum Anbieter</a>.</p>`:`<p>Wähle links deinen Jahrgang und ein Fach. In Klasse 8 kannst du drei ausgearbeitete Themen ausprobieren.</p><ol><li><strong>Stoff lernen:</strong> kurze Erklärungen, Beispiele und Verständnisfragen.</li><li><strong>Unterricht üben:</strong> einzelne Aufgaben, gestufte Hinweise und Lösungen zum Vergleichen.</li><li><strong>Schulaufgabe:</strong> zwei Übungssätze je Fach, optional mit Zeitvorgabe, KI-Bewertung und zusätzlicher Eigenkontrolle.</li></ol><p>Kurze Zahlenergebnisse werden automatisch geprüft. Freie Antworten und Schulaufgaben kannst du mit KI bewerten lassen: Punkte je Kriterium, Stärken, Fehler und nächste Schritte. Du kannst zusätzlich selbst mit Lösungsvorschlägen vergleichen. Eine KI-Einschätzung ist keine offizielle Schulnote.</p><p>Dein Lernstand bleibt in diesem Browser. Lade ihn zum Sichern herunter. Gib bitte keine Namen oder anderen persönlichen Angaben in deine Antworten ein.</p>`;
+  $('#info-content').innerHTML=kind==='about'?`<p>Dies ist eine eigenständige Testseite von Daniel Zahnweh. Sie ist von myAbiFlow technisch getrennt und nutzt einen eigenen KI-Bewertungsdienst ohne Zugriff auf myAbiFlow-Konten oder Lernergebnisse.</p><p>Interaktiv verfügbar: drei Klasse-8-Pakete. Klassen 9 bis 11 und Englisch 8 als zweite Fremdsprache zeigen den geplanten Ausbau. Die Inhalte sind Referenzentwürfe zur Erprobung, keine amtlichen Prüfungen.</p><p>Entwürfe, Eigenkontrollen und erhaltene KI-Rückmeldungen werden in deinem Browser gespeichert. Wenn du eine KI-Bewertung anforderst und die Übermittlung bestätigst, werden deine Antwort, Aufgabenstellung und Bewertungsraster an den separaten Bewertungsdienst und OpenAI übermittelt. Der Dienst speichert keine Antworttexte dauerhaft; für die Wiederholung derselben Anfrage können sie vorübergehend bis zu einer Stunde im Arbeitsspeicher vorliegen. OpenAI verarbeitet die Anfrage nach seinen API-Datenschutzbedingungen. Bitte keine Namen oder persönlichen Angaben eingeben. Die Punkte sind KI-Einschätzungen und keine offiziellen Schulnoten. Bei der Aufgabenerstellung werden die gewählte Konfiguration und gegebenenfalls die eingegebene eigene Aufgabe an OpenAI gesendet. Eingelesene Textdateien kannst du vorher prüfen. Mikrofonaufnahmen werden nicht hochgeladen und verschwinden beim Verlassen der Aufnahmeansicht, wenn du sie nicht herunterlädst. Es gibt keine Analyse- oder Werbedienste.</p><p>GitHub Pages stellt die Website bereit und verarbeitet dabei technisch notwendige Zugriffsdaten. <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">Datenschutzhinweise von GitHub</a>.</p><p>Kontakt: <a href="mailto:info@myabiflow.de">info@myabiflow.de</a>. <a href="https://myabiflow.de/impressum.html" target="_blank" rel="noopener">Angaben zum Anbieter</a>.</p>`:`<p>Wähle links deinen Jahrgang und ein Fach. In Klasse 8 kannst du drei ausgearbeitete Themen ausprobieren.</p><ol><li><strong>Stoff lernen:</strong> kurze Erklärungen, Beispiele und Verständnisfragen.</li><li><strong>Unterricht üben:</strong> einzelne Aufgaben, gestufte Hinweise und Lösungen zum Vergleichen.</li><li><strong>Schulaufgabe:</strong> KI-generierte Aufgaben oder eigene Aufgaben konfigurieren, ansehen, abgeben und mit KI auswerten. Zwei feste Beispielsätze je Fach bleiben verfügbar.</li></ol><p>Kurze Zahlenergebnisse werden automatisch geprüft. Freie Antworten und Schulaufgaben kannst du mit KI bewerten lassen: Punkte je Kriterium, Stärken, Fehler und nächste Schritte. Du kannst zusätzlich selbst mit Lösungsvorschlägen vergleichen. Eine KI-Einschätzung ist keine offizielle Schulnote.</p><p>Dein Lernstand bleibt in diesem Browser. Lade ihn zum Sichern herunter. Gib bitte keine Namen oder anderen persönlichen Angaben in deine Antworten ein.</p>`;
   $('#info-dialog').showModal();
 }
 document.addEventListener('click',event=>{
@@ -203,7 +168,6 @@ document.addEventListener('click',event=>{
   if(action==='next-exercise'){state.exercise[context()]=(keyIndex(context(),pack().exercises.length,state.exercise)+1)%pack().exercises.length;save();renderPractice();}
   if(action==='back-learn'||action==='pause-exam') setMode('lernen');
   if(action==='print') window.print();
-  if(action==='exam-next'){state.examVariant=(state.examVariant||'A')==='A'?'B':'A';save();renderExam();}
   if(b.id==='record-start')startRecording();if(b.id==='record-stop')stopRecording();
   if(b.id==='help-open')info();if(b.id==='about-open')info('about');
   if(b.hasAttribute('data-close'))b.closest('dialog').close();
@@ -219,19 +183,14 @@ document.addEventListener('change',event=>{
   if(el.id==='grade'){state.grade=Number(el.value);save();render();focusHeading();}
   if(el.id==='variant'){state.variant=el.value;save();render();focusHeading();}
   if(el.id==='self-check'){const ex=currentExercise();state.answers[ex.id]={...response(ex),self:el.value};save();}
-  if(el.id==='exam-variant'){state.examVariant=el.value;save();renderExam();}
-  if(el.dataset.score!==undefined){const a=examData();a.scores ||= [];a.scores[Number(el.dataset.score)]=el.value===''?null:Number(el.value);save();$('#score-total').innerHTML=scoreTotal(a);}
 });
 document.addEventListener('input',event=>{
   const el=event.target;
   if(el.id==='slope'||el.id==='intercept')updateGraph();
   if(el.id==='answer'){el.setCustomValidity('');const ex=currentExercise();state.answers[ex.id]={...response(ex),text:el.value};save();const result=$('#ai-exercise .ai-result');if(result)result.innerHTML='<p class="self-check-note">Deine Antwort wurde verändert. Fordere eine neue KI-Bewertung an.</p>';}
-  if(el.id==='exam-answer'){el.setCustomValidity('');if(examData()){examData().text=el.value;save();}}
 });
 document.addEventListener('submit',event=>{
   if(event.target.id==='practice-form')checkPractice(event);
-  if(event.target.id==='exam-start'){event.preventDefault();const timed=new FormData(event.target).get('timing')==='timed';state.exams[examKey()]={text:'',startedAt:Date.now(),deadline:timed?Date.now()+(state.subject==='mathematik'?30:45)*60000:null,submitted:false};save();renderExam();$('#exam-answer').focus();}
-  if(event.target.id==='exam-submit'){event.preventDefault();const field=$('#exam-answer');if(!field.value.trim()){field.setCustomValidity('Schreibe zuerst deine Bearbeitung.');field.reportValidity();return;}examData().text=field.value;examData().submitted=true;examData().submittedAt=Date.now();clearInterval(timerInterval);save();renderExam();announce('Bearbeitung abgegeben. Der Erwartungshorizont ist jetzt sichtbar.');}
 });
 document.querySelector('.mode-tabs').addEventListener('keydown',event=>{
   const buttons=[...document.querySelectorAll('[data-mode]')],i=buttons.indexOf(document.activeElement);if(i<0)return;

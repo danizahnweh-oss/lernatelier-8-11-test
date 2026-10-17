@@ -16,7 +16,7 @@ async function ready(){
 (async()=>{
  await ready();const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:{})});
  const page=await browser.newPage({viewport:{width:1440,height:1050},acceptDownloads:true});
- const errors=[],report=[];page.on('pageerror',e=>errors.push(e.message));
+ const errors=[],report=[];page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());
  const check=async(name,fn)=>{await fn();report.push({name,status:'passed'});console.log('OK',name);};
  const choose=async(subject)=>{await page.locator(`[data-subject="${subject}"]`).click();};
  const mode=async(m)=>{await page.locator(`[data-mode="${m}"]`).click();};
@@ -65,24 +65,39 @@ async function ready(){
  });
  for(const subject of ['mathematik','deutsch','englisch']){
   for(const label of ['A','B']){
-   await check(`${subject} Übungssatz ${label}: Abgabe und Eigenkontrolle`,async()=>{
-    await choose(subject);await mode('schulaufgabe');await page.locator('#exam-variant').selectOption(label);
-    assert.equal(await page.locator('.exam-paper').count(),0);
-    await page.locator('#exam-start button[type=submit]').click();
-    assert.equal(await page.getByRole('heading',{name:'Erwartungshorizont',exact:true}).count(),0);
-    await page.locator('#exam-answer').fill('Meine Bearbeitung zu den Aufgaben. 1. Eigener Lösungsweg. 2. Begründung und Beispiel.');
+   await check(`${subject} Beispiel ${label}: Vier Schritte und Wiederaufnahme`,async()=>{
+    await choose(subject);await mode('schulaufgabe');
+    await page.locator('[data-training-step="1"]').click();
+    await page.locator('[data-training-source="reference"]').click();
+    await page.locator('#training-reference').selectOption(label);
+
+    await page.locator('#training-setup button[type=submit]').click();
+    assert.equal(await page.locator('.training-steps [aria-current=step]').innerText(),'2\nAufgabe');
+    await page.locator('.training-paper [data-training-step="3"]').click();
+    await page.locator('#training-answer').fill('Meine Bearbeitung zu den Aufgaben. 1. Eigener Lösungsweg. 2. Begründung und Beispiel.');
     await mode('lernen');await mode('schulaufgabe');
-    assert.match(await page.locator('#exam-answer').inputValue(),/Meine Bearbeitung/);
-    await page.locator('#exam-submit button[type=submit]').click();
-    assert.equal(await page.getByRole('heading',{name:'Erwartungshorizont',exact:true}).count(),1);
-    for(let i=0;i<4;i++)await page.locator(`#score-${i}`).selectOption('2');
-    assert.match(await page.locator('.result-total').innerText(),/8 von/);
-    await page.reload();await page.locator('.result-total').waitFor();assert.match(await page.locator('.result-total').innerText(),/8 von/);
+    assert.match(await page.locator('#training-answer').inputValue(),/Meine Bearbeitung/);
+    await page.locator('#training-submit button[type=submit]').click();
+    assert.ok(await page.locator('#training-ai .ai-request').isVisible());
+    await page.reload();await page.locator('#training-ai').waitFor();
+    await page.getByText('Deine abgegebene Antwort',{exact:true}).click();
+    assert.match(await page.locator('.submission').innerText(),/Meine Bearbeitung/);
     if(label==='A')await axe(`${subject}-schulaufgabe`);
    });
   }
  }
+ await check('KI-Generierung und eigene Aufgabe',async()=>{
+  await choose('mathematik');await mode('schulaufgabe');await page.locator('[data-training-step="1"]').click();await page.locator('[data-training-source="generate"]').click();
+  await page.route('**/api/generate',async route=>{const b=route.request().postDataJSON();assert.equal(b.subject,'mathematik');await route.fulfill({status:200,contentType:'application/json',headers:{'Access-Control-Allow-Origin':new URL(base).origin},body:JSON.stringify({id:'generated-test',title:'Generierte lineare Funktionen',assignment:'### Aufgabe 1\nBestimme die Steigung bei y = 2x + 3.',criteria:[{id:'aufgabe1',name:'Aufgabe 1',max:20}],minutes:30,taskToken:'test-token',source:b.source})});});
+  await page.locator('#training-count').fill('1');await page.locator('#training-points').fill('20');await page.locator('#training-minutes').fill('30');await page.locator('#training-consent').check();
+  await page.locator('#training-setup button[type=submit]').click();await page.getByText('Generierte lineare Funktionen',{exact:true}).waitFor();
+  await page.locator('.training-paper [data-training-step="3"]').click();await page.locator('[data-training-timer]').click();await page.locator('[data-training-timer]').click();assert.match(await page.locator('[data-training-timer]').innerText(),/starten/);
+  await page.locator('#training-answer').fill('m = 2.');await page.locator('#training-submit button[type=submit]').click();assert.ok(await page.locator('#training-ai .ai-request').isVisible());
+  await page.locator('[data-training-step="1"]').click();await page.locator('[data-training-source="own"]').click();await page.locator('#training-own').fill('Bestimme die Steigung der Geraden y = 2x + 3.');await page.locator('#training-consent').check();
+  await page.locator('#training-setup button[type=submit]').click();await page.getByText('Generierte lineare Funktionen',{exact:true}).waitFor();await page.unroute('**/api/generate');
+ });
  await check('Jahrgänge und Sprachfolge sind getrennt',async()=>{
+  await choose('englisch');
   for(const g of ['9','10','11']){await page.locator('#grade').selectOption(g);assert.ok(await page.locator('.topic-row').count()>3);assert.ok(await page.locator('#workspace').isHidden());}
   await page.locator('#grade').selectOption('8');await page.locator('#variant').selectOption('E2');
   assert.ok(await page.locator('#workspace').isHidden());assert.doesNotMatch(await page.locator('#planned').innerText(),/London/);
@@ -119,6 +134,9 @@ async function ready(){
     await choose(s);await mode('lernen');
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`Overflow ${width} ${s}`);
    }
+   await mode('schulaufgabe');await page.locator('[data-training-step="1"]').click();await page.locator('[data-training-source="generate"]').click();
+   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`Training Overflow ${width}`);await axe(`training-${width}`);
+   await page.screenshot({path:path.join(out,`training-${width}.png`),fullPage:true});
    await page.screenshot({path:path.join(out,`viewport-${width}.png`),fullPage:true});
   }
   await page.setViewportSize({width:390,height:844});await choose('mathematik');await mode('lernen');await axe('mobile');

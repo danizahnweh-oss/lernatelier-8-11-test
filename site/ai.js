@@ -32,5 +32,10 @@ window.LernKI=(()=>{
   });
   checkbox.addEventListener('change',()=>checkbox.setCustomValidity(''));
  }
- return {mount};
+ async function request(path,body){
+  const settings=await config;
+  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),190000);
+  try{const response=await fetch(new URL(path,settings.endpoint).href,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',body:JSON.stringify(body),signal:controller.signal});const result=await response.json();if(!response.ok)throw new Error(result.error||'Die Anfrage konnte nicht abgeschlossen werden.');return result;}finally{clearTimeout(timeout);}
+ }
+ return {mount,request,resultHTML};
 })();

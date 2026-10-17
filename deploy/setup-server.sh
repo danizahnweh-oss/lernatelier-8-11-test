@@ -80,8 +80,8 @@ server {
         proxy_pass http://127.0.0.1:4317;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
-        proxy_read_timeout 100s;
-        proxy_send_timeout 100s;
+        proxy_read_timeout 200s;
+        proxy_send_timeout 200s;
     }
     location / { return 404; }
 }
